@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/HinayDevelpor22/Serai/issues"
   },
-  "homepage": "https://github.com/HinayDevelpor22/Serai#readme"
+  "homepage": "https://github.com/HinayDevelpor22/Serai#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
 }
