@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Contact Us</title>
+    <!-- Custom icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/custom-icons.css">
+    <link rel="stylesheet" href="contact.css">
+</head>
+<body>
+    <main>
+        <p>This is the main content area of your website.</p>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-logo">
+                <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/db127843-b239-47d4-b39e-d5f3193f687e.png" alt="Company logo - modern green leaf design with company name in clean typography" />
+                <p>Providing exceptional experiences with sustainable practices since 2010.</p>
+            </div>
+            
+            <div class="footer-links">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#" class="footer-link">Home</a></li>
+                    <li><a href="#" class="footer-link">Facilities</a></li>
+                    <li><a href="#" class="footer-link">Rooms</a></li>
+                    <li><a href="#" class="footer-link">Contact Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-contact">
+                <h3>Stay Updated</h3>
+                <form class="newsletter-form">
+                    <input type="email" placeholder="Your email address" required>
+                    <button type="submit">Subscribe 
+                        <svg class="subscribe-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z"/>
+                        </svg>
+                    </button>
+                </form>
+                <div class="footer-social" style="margin-top: 20px;">
+                    <a href="#" aria-label="Instagram">
+                        <svg class="custom-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M7.8,2h8.4C19.4,2,22,4.6,22,7.8v8.4c0,3.2-2.6,5.8-5.8,5.8H7.8C4.6,22,2,19.4,2,16.2V7.8C2,4.6,4.6,2,7.8,2z"/>
+                            <circle cx="12" cy="12" r="3.5" fill="none" stroke="currentColor" stroke-width="1.5"/>
+                            <circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Facebook">
+                        <svg class="custom-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M22,12c0-5.5-4.5-10-10-10S2,6.5,2,12c0,5.1,3.7,9.3,8.5,10v-7H7.9V12h2.6V9.6c0-2.7,1.6-4.1,4-4.1 c1.1,0,2.2,0.2,2.2,0.2v2.5h-1.3c-1.2,0-1.6,0.8-1.6,1.6V12h2.8l-0.4,3h-2.3v7C18.3,21.3,22,17.1,22,12z"/>
+                        </svg>
+                    </a>
+                    <a href="#" aria-label="Pinterest">
+                        <svg class="custom-icon" viewBox="0 0 24 24">
+                            <path fill="currentColor" d="M12,2C6.5,2,2,6.5,2,12c0,4.3,2.7,8.1,6.8,9.5c-0.1-0.8-0.2-2,0-2.9c0.2-0.9,1.5-6.1,1.5-6.1s-0.4-0.7-0.4-1.8 c0-1.7,1-3,2.2-3c1,0,1.5,0.8,1.5,1.7c0,1-0.7,2.6-1,4c-0.3,1.3,0.7,2.3,2,2.3c2.4,0,3.9-2.7,3.9-5.9c0-2.4-1.6-4.1-4.4-4.1 c-3.1,0-5,2.3-5,4.6c0,0.9,0.3,1.5,0.8,2c0.2,0.3,0.3,0.4,0.2,0.7c-0.1,0.2-0.2,0.7-0.2,0.9c-0.1,0.3-0.3,0.4-0.6,0.3 c-1.7-0.7-2.5-2.7-2.5-4.8c0-3.6,2.8-7.1,8.3-7.1c4.4,0,7.7,3.1,7.7,6.9c0,4.6-2.7,7.9-6.7,7.9c-1.3,0-2.6-0.7-3-1.5 c0,0-0.7,2.9-0.9,3.6c-0.3,1.1-1.1,2.4-1.6,3.2C9.9,21.8,10.9,22,12,22c5.5,0,10-4.5,10-10S17.5,2,12,2z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2023 Your Company Name. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript for additional interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click animation to footer links
+            const footerLinks = document.querySelectorAll('.footer-link');
+            footerLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    ripple.className = 'ripple';
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    
+                    ripple.style.width = ripple.style.height = `${size}px`;
+                    ripple.style.left = `${e.clientX - rect.left - size/2}px`;
+                    ripple.style.top = `${e.clientY - rect.top - size/2}px`;
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Animate elements on scroll
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.footer-container > div').forEach((section, index) => {
+                section.style.opacity = 0;
+                section.style.transform = `translateY(${20 * (index + 1)}px)`;
+                section.style.transition = `opacity 0.5s ${index * 0.1}s ease, transform 0.5s ${index * 0.1}s ease`;
+                observer.observe(section);
+            });
+        });
+
+        // Back to top button
+        const backToTopBtn = document.querySelector('.back-to-top');
+        backToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
