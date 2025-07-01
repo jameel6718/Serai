@@ -58,14 +58,18 @@ footer {
   overflow: hidden;
 }
 .footer-container {
-  max-width: 1200px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 20px;
   display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
+  justify-content: space-evenly;
+  margin-left: 100px;
+  margin-right: 100px;
+  /* flex-wrap: wrap; */
+  /* gap: 40px; */
 }
 .footer-logo {
+  width: 30%;
   flex: 1 1 300px;
 }
 .logo-container {
@@ -83,32 +87,51 @@ footer {
 }
 .footer-about {
   margin-bottom: 20px;
+  width: 400px;
   line-height: 1.6;
 }
-
 .footer-links {
+  width: 40%;
+  margin-left: 80px;
   flex: 1 1 200px;
   animation: fadeIn 1s ease-out 0.2s both;
 }
-.footer-heading {
+.footer-heading1 {
   font-size: 20px;
   margin-bottom: 20px;
   position: relative;
   padding-bottom: 10px;
+  padding-left: 10px;
 }
-.footer-heading::after {
+.footer-heading1::after {
   content: '';
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 50px;
+  width: 130px;
   height: 2px;
   background-color: #9dd49f;
 }
 .footer-nav {
   list-style: none;
+  text-align: center;
+  width: 140px;
 }
-
+.footer-heading2 {
+  font-size: 20px;
+  margin-bottom: 20px;
+  position: relative;
+  padding-bottom: 10px;
+}
+.footer-heading2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 160px;
+  height: 2px;
+  background-color: #9dd49f;
+}
 .footer-nav li {
   margin-bottom: 12px;
   transition: transform 0.3s ease;
@@ -124,6 +147,7 @@ footer {
   transform: translateX(5px);
 }
 .footer-social {
+  width: 30%;
   flex: 1 1 200px;
   animation: fadeIn 1s ease-out 0.4s both;
 }
@@ -136,6 +160,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
   width: 40px;
   height: 40px;
   border-radius: 50%;
@@ -198,7 +223,6 @@ footer {
 .footer-nav li:hover {
   transform: translateX(5px);
 }
-
 /* Responsive styles */
 @media (max-width: 768px) {
   .footer-container {
