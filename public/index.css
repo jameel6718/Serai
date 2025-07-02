@@ -61,6 +61,23 @@
   width: 100%;
   height: 700px;
 }
+.hero-text{
+  width: 100%;
+  height: 500px;
+  background: #9DD49F;
+  margin-top: -5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero-text p{
+  padding-left: 220px;
+  padding-right: 220px;
+  text-align: center;
+  color: #012305;
+  font-size: 40px;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
 
 /*Footer*/
 footer {
