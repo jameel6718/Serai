@@ -72,24 +72,24 @@ footer {
 .footer-logo {
   width: 30%;
   flex: 1 1 300px;
+  margin-top: -70px;
 }
 .logo-container {
-  display: flex;
-  align-items: center;
-  margin-bottom: 20px;
-  animation: slideInLeft 0.8s ease-out;
+  margin-right: 15px;
+  filter: brightness(0) invert(1);
+  transition: transform 0.3s ease;
 }
 .logo-img {
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
+  width: 200px;
+  height: auto;
   filter: brightness(0) invert(1);
   transition: transform 0.3s ease;
 }
 .footer-about {
   margin-bottom: 20px;
-  width: 400px;
-  line-height: 1.6;
+  width: 300px;
+  line-height: 1.2;
+  margin-top: -30px;
 }
 .footer-links {
   width: 40%;
