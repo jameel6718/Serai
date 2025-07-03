@@ -16,6 +16,7 @@
     display: flex;
     align-items: center;
     position: fixed;
+    z-index: 1000; 
 }
 .logo{
     width: 40%;
@@ -92,6 +93,7 @@
   font-size: 50px;
   text-transform: uppercase;
   font-weight: 500;
+  color: #012305;
 }
 .section1{
   width: 1000px;
@@ -142,24 +144,106 @@
 .hero-section2{
   display: flex;
   width: 100%;
-  height: 500px; 
-  background-color: #012305; 
+  height: 600px; 
+  background-color: #E9E9E9; 
+}
+.hero-section2 div{
+  width: 20%;
+  background-color: #cb9662;
+  margin-top: 100px;
+  margin-bottom: 100px;
 }
 .hero-section2 img{
-  width: 50%;
+  width: 35%;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 .hero-section2 h1{
-  width: 50%;
+  width: 45%;
   align-self: center;
   text-align: center;
-  color: #E4C082;
+  color: #4E3629;
+  background-color: #cb9662;
+  padding-top: 80px;
+  padding-bottom: 80px;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   font-size: 40px;
   font-weight: 100;
 }
+.highlight{
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-size: 80px;
+  font-style: italic;
+}
 .hero-section4{
   width: 100%;
+  height: 600px;
+  background-color: #E9E9E9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.hero-section4-text{
+  width: 1000px;
+  height: 150px;
+}
+.hero-section4-text h1{
+  padding-bottom: 20px;
+  font-size: 50px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #012305;
+}
+.hero-section4-content{
+  width: 1000px;
+  height: 350px;
+  border: 1px  solid black;
+}
+.hero-section5{
+  width: 100%;
+  height: 800px;
+  background-color: #E9E9E9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.hero-section5 h1{
+  width: 1000px;
   height: 100px;
+  display: flex;
+  justify-content: center;
+  font-size: 60px;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #012305;
+  font-style: italic;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+.gallery{
+  width: 1000px;
+  height: 750px;
+}
+.gallery {
+    display: flex;
+    flex-wrap: wrap;        
+    gap: 20px;              
+    justify-content: space-between; 
+}
+
+.gallery img {    
+    height: 300px;
+    object-fit: cover;      
+    transition: transform 0.4s; 
+}
+
+.gallery img:hover {
+    transform: scale(1.05); 
+    cursor: pointer;
+    z-index: 10;
+    position: relative;
 }
 
 /*Footer*/
