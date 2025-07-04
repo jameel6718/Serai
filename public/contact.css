@@ -325,9 +325,6 @@ button:hover {
   margin-bottom: 20px;
   transition: transform 0.2s ease;
 }
-.form-group:hover {
-  transform: translateX(5px);
-}
 label {
   display: block;
   margin-bottom: 10px;
@@ -351,6 +348,11 @@ input:focus, textarea:focus {
   border: 1px solid #012305;
   background: rgba(255, 255, 255, 0.25) !important;
 }
+.form-button{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+}
 button {
   width: 200px;
   padding: 12px;
@@ -363,8 +365,6 @@ button {
   cursor: pointer;
   letter-spacing: 1px;
   margin-top: 10px;
-  margin-left: 110px;
-  box-shadow: 0 4px 15px #4e3629;
 }
 button:hover {
   background: #012305; /* Dark green */
