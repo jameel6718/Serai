@@ -64,12 +64,15 @@
         <div class="hero-section5">
             <h1>Gallery</h1>
             <div class="gallery">
-                <img src="https://i.pinimg.com/736x/ed/5f/a6/ed5fa6b70684629ba04e0368ed0288a6.jpg" alt="Image 1" width="250px">
-                <img src="https://i.pinimg.com/736x/2f/8d/23/2f8d23c979a8ab75b938ac86876a33cc.jpg" alt="Image 2" width="400px">
-                <img src="https://i.pinimg.com/736x/2a/4b/27/2a4b27eec6a9b055ebbf1903183e1267.jpg" alt="Image 3" width="250px">
-                <img src="https://i.pinimg.com/736x/39/f5/b0/39f5b0b980133a75e556f74e33c6f4d5.jpg" alt="Image 4" width="250px">
-                <img src="https://i.pinimg.com/736x/86/4f/fe/864ffed47ffc22b5167737cde2ecb136.jpg" alt="Image 5" width="250px">
-                <img src="https://i.pinimg.com/736x/d3/c7/68/d3c768cf76db30500f337a37c9c7876e.jpg" alt="Image 6" width="400px">
+                <img src="https://i.pinimg.com/736x/ed/5f/a6/ed5fa6b70684629ba04e0368ed0288a6.jpg" alt="Image 1" width="250px" onclick="openLightbox(this.src)">
+                <img src="https://i.pinimg.com/736x/2f/8d/23/2f8d23c979a8ab75b938ac86876a33cc.jpg" alt="Image 2" width="400px" onclick="openLightbox(this.src)">
+                <img src="https://i.pinimg.com/736x/2a/4b/27/2a4b27eec6a9b055ebbf1903183e1267.jpg" alt="Image 3" width="250px" onclick="openLightbox(this.src)">
+                <img src="https://i.pinimg.com/736x/39/f5/b0/39f5b0b980133a75e556f74e33c6f4d5.jpg" alt="Image 4" width="250px" onclick="openLightbox(this.src)">
+                <img src="https://i.pinimg.com/736x/86/4f/fe/864ffed47ffc22b5167737cde2ecb136.jpg" alt="Image 5" width="250px" onclick="openLightbox(this.src)">
+                <img src="https://i.pinimg.com/736x/d3/c7/68/d3c768cf76db30500f337a37c9c7876e.jpg" alt="Image 6" width="400px" onclick="openLightbox(this.src)">
+            </div>
+            <div id="lightbox" class="lightbox" onclick="closeLightbox()">
+                <img id="lightbox-img" src="">
             </div>
         </div>
     </main>
@@ -90,9 +93,9 @@
             <div class="footer-links">
                 <h3 class="footer-heading1">Quick Links</h3>
                 <ul class="footer-nav">
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Feedback</a></li>
-                    <li><a href="#">Term & Conditions</a></li>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="conditions.html">Term & Conditions</a></li>
                 </ul>
             </div>
               
@@ -106,5 +109,7 @@
             </div>
         </div>
     </footer>
+
+    <script src="index.js"></script>
 </body>
 </html>
