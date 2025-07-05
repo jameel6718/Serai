@@ -50,7 +50,8 @@ document.addEventListener('DOMContentLoaded', function () {
     function validateEmail() {
         const email = emailInput.value.trim();
         const emailError = document.getElementById('emailError');
-        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+        if (email !== '' && !emailPattern.test(email)) {
             emailError.textContent = 'Please enter a valid email address!';
             emailInput.classList.add('error');
             return false;
@@ -95,7 +96,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const successMessage = document.createElement('div');
             successMessage.className = 'success-message';
             successMessage.textContent = 'Reservation Successful!';
-            document.querySelector('.form-button').appendChild(successMessage);
+            document.querySelector('.sucessmessage').appendChild(successMessage);
 
             // Reset form fields
             form.reset();
