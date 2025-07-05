@@ -340,7 +340,7 @@ body{
     }
     .pool-blog {
       height: 500px;
-      background:url('https://img.freepik.com/premium-photo/luxurious-resort-pool-surrounded-by-palm-trees-cabanas_14117-742618.jpg');
+      background:url('https://img.freepik.com/premium-photo/modern-superior-hotel-pool-superior-outdoor-sofas_1277133-27450.jpg?semt=ais_hybrid&w=740');
       background-size: cover;
       background-position: center;
       display: flex;
@@ -399,7 +399,7 @@ body{
       }
       .laundary-blog {
         height: 500px;
-        background:url('https://img.freepik.com/premium-photo/selective-focus-modern-simple-laundry-room-with-washing-machine-white-walls-decorated-with-minimalist-wooden-shelf-washing-machine_1208049-6880.jpg');
+        background:url('https://www.laundrylite.com/public/web-assets/images/hotel-linen-laundry-service.jpg');
         background-size: cover;
         background-position: center;
         display: flex;
@@ -453,7 +453,7 @@ body{
     justify-content: center;
     flex-direction: column;
     align-items: center;
-    padding-top: 20px;
+    padding-top: 25px;
     /* text-align: center; */
     border: 1px solid #9DD49F;
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
