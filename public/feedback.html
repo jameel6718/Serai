@@ -22,6 +22,63 @@
         </nav>
     </header>
 
+    <main>
+        <div class="hero-section">
+            <h1>FEEDBACK</h1>
+        </div>
+        <div class="section1">
+            <p>Your thoughts matter to us. At Serai, we are committed to providing exceptional service and creating memorable experiences for our guests. We value your feedback as it helps us grow and serve you better. Whether it’s a compliment, a suggestion, or an area we can improve, we encourage you to share your experience with us. Your voice guides us in making Serai your perfect home away from home.</p>
+        </div>
+        
+        <div class="form-section">
+            <form id="feedbackForm" novalidate>
+                <div class="form-group">
+                    <label for="name">Your Name:</label>
+                    <input type="text" id="name" name="name">
+                    <div class="error-message" id="nameError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Your Email:</label>
+                    <input type="email" id="email" name="email">
+                    <div class="error-message" id="emailError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="rating">Your Rating:</label>
+                    <select id="rating" name="rating">
+                        <option value="">Select a rating</option>
+                        <option value="5">Excellent</option>
+                        <option value="4">Very Good</option>
+                        <option value="3">Good</option>
+                        <option value="2">Fair</option>
+                        <option value="1">Poor</option>
+                    </select>
+                    <div class="error-message" id="ratingError"></div>
+                </div>
+
+                <div class="form-group">
+                    <label for="comments">Your Feedback:</label>
+                    <textarea id="comments" name="comments" rows="5"></textarea>
+                    <div class="error-message" id="commentsError"></div>
+                </div>
+
+                <button type="submit">Submit Feedback</button>
+                <div class="success-message" id="successMessage"></div>
+            </form>
+        </div>
+
+    <div class="review-section">
+        <h1>Recent Reviews</h1>
+        <div class="reviews" id="reviewsContainer">
+            <!-- Recent reviews will appear here -->
+        </div>
+    </div>
+
+
+
+    </main>
+
 
     <footer>
         <div class="footer-bg-pattern"></div>
@@ -56,5 +113,6 @@
         </div>
     </footer>
 
+    <script src="feedback.js"></script>
 </body>
 </html>
