@@ -21,9 +21,117 @@
             </ul>
         </nav>
     </header>
+
     <main>
-        
-      </main>
+        <div class="heroSection">
+            <img src="https://i.pinimg.com/736x/7e/54/61/7e54611b379dc4077871a473db4cfa6c.jpg" alt="Hero Section image">
+        </div>
+
+        <div class="container">
+            <div class="section">
+               <h2>ELEGENT ROOMS</h2>
+               <p>
+                    Our elegent, cozy, and spacious rooms at our hotel will give you the opportunity to enjoy every minute of your stay, surrounded by exquisite design and carefully selected furniture. Our rooms are designed for  your comfort and relaxation.
+                </p>
+            </div>
+            <div class="rooms-container">
+                <div class="room-card" onclick="selectRoom('Deluxe Room', 380)">
+                    <img src="https://t3.ftcdn.net/jpg/09/39/30/08/360_F_939300876_wegGJ0YtLpf1d81fQF0nPFP9fbvOQ2OP.jpg" alt="Deluxe Room">
+                    <div class="room-details">
+                        <h3>Deluxe Room</h3>
+                        <p>Price: $380 / night</p>
+                    </div>
+                </div>
+
+                <div class="room-card" onclick="selectRoom('Junior Suite', 400)">
+                    <img src="https://img.freepik.com/premium-photo/bedroom_604472-136147.jpg" alt="Junior Suite">
+                    <div class="room-details">
+                        <h3>Junior Suite</h3>
+                        <p>Price: $400 / night</p>
+                    </div>
+                </div>
+
+                <div class="room-card" onclick="selectRoom('Presidential Suite', 450)">
+                    <img src="https://i.pinimg.com/736x/5b/ce/f5/5bcef5cf8001d9b73bb07b40a425345e.jpg" alt="Presidential Suite">
+                    <div class="room-details">
+                        <h3>Presidential Suite</h3>
+                        <p>Price: $450 / night</p>
+                    </div>
+                </div>
+
+                <div class="room-card" onclick="selectRoom('Executive Suite', 500)">
+                    <img src="https://i.pinimg.com/736x/04/fa/06/04fa067269bd53e7be265d57684db443.jpg" alt="Executive Suite">
+                    <div class="room-details">
+                        <h3>Executive Suite</h3>
+                        <p>Price: $500 / night</p>
+                    </div>
+                </div>   
+            </div>
+
+            <div class="section">
+               <h2>SEPARATE COZY RESIDENCES</h2>
+               <p>
+                    Our individual cottages are in harmony with nature and will allow you to enjoy tranquility and privacy. Each cottage is designed taking into account the ecosystem, using natural materials and modern technologies to ensure mmaximum comfort.
+                </p>
+            </div>
+            <div class="residence-container">
+                <div class="room-card, residence-card" onclick="selectRoom('3 Bedroom Residence', 600)">
+                    <img src="https://i.pinimg.com/736x/7e/2b/65/7e2b65121d1d84d082187df295785db1.jpg" alt="Residence">
+                    <img src="https://i.pinimg.com/736x/bf/dd/d4/bfddd42ecee4907ee4d956d115137670.jpg" alt="Residence">
+                    <img src="https://i.pinimg.com/736x/7b/98/5a/7b985a4f5a4bb460ba44f133221472b2.jpg" alt="Residence">
+
+                </div>
+                <div class="room-card, residence-card" onclick="selectRoom('3 Bedroom Residence', 600)">
+                    <div class="residence-details">
+                        <h3>3 Bedroom Residence</h3>
+                        <p>Welcome to the Three-Bedroom Residence – a luxurious space designed for families, groups, or guests seeking comfort, privacy, and style in one exceptional setting. Perfectly crafted for longer stays or shared getaways, this residence offers the best of both spacious living and premium hotel services.</p>
+                        <p>Price: $600 / night</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="residence-container">
+                <div class="room-card, residence-card" onclick="selectRoom('4 Bedroom Residence', 800)">
+                    <div class="residence-details">
+                        <h3>4 Bedroom Residence</h3>
+                        <p>The Four-Bedroom Residence at Serai Hotel is a spacious retreat designed for larger families or groups seeking comfort, privacy, and style. With four beautifully furnished bedrooms, a welcoming living space, a private balcony with stunning views, and all modern amenities, this residence offers the perfect setting for unforgettable stays.</p>
+                        <p>Price: $800 / night</p>
+                    </div>
+                </div>
+                <div class="room-card, residence-card" onclick="selectRoom('4 Bedroom Residence', 800)">
+                    <img src="https://i.pinimg.com/736x/1c/19/99/1c1999d292dec99e5743b81ba4d593b4.jpg" alt="Residence">
+                    <img src="https://i.pinimg.com/736x/db/05/a4/db05a4fe298577e4d7cce6e4f023d5d2.jpg" alt="Residence">
+                    <img src="https://i.pinimg.com/736x/ac/b7/37/acb737ee361c1bd96a7ec0a26ddd0809.jpg" alt="Residence">
+                </div>
+            </div>
+
+
+            <div class="booking-table" id="bookingTable">
+                    <h2>Booking Summary</h2>
+                    <table>
+                        <tr>
+                            <th>Room Type</th>
+                            <th>Check-in</th>
+                            <th>Check-out</th>
+                            <th>Price per Night</th>
+                            <th>Total Days</th>
+                            <th>Total Payment</th>
+                        </tr>
+                        <tr>
+                            <td id="roomType"></td>
+                            <td><input type="date" id="checkin" onchange="calculateTotal()"></td>
+                            <td><input type="date" id="checkout" onchange="calculateTotal()"></td>
+                            <td id="pricePerNight"></td>
+                            <td id="totalDays"></td>
+                            <td id="totalPayment"></td>
+                        </tr>
+                    </table>
+
+                    <a href="contact.html#formSection" id="proceedBtn" class="proceed-btn disabled">Proceed to Contact</a>
+                </div>
+        </div>
+    </main>
+
       <footer>
           <div class="footer-bg-pattern"></div>
           <div class="footer-container">
@@ -56,5 +164,7 @@
               </div>
           </div>
       </footer>
+
+      <script src="rooms.js"></script>
 </body>
 </html>
