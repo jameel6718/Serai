@@ -325,6 +325,10 @@ button:hover {
   margin-bottom: 30px;
   transition: transform 0.2s ease;
 }
+section{
+  display: flex;
+  height: 60px;
+}
 label {
   display: block;
   margin-bottom: 10px;

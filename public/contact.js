@@ -66,3 +66,10 @@ const form = document.getElementById('contactForm');
                 successMessage.style.display = 'none';
             }, 2000);
         });
+
+window.addEventListener('load', () => {
+        if (window.location.hash === '#formSection') {
+            document.querySelector(window.location.hash).scrollIntoView({ behavior: 'smooth' });
+        }
+    });
+// document.getElementById('formSection').scrollIntoView({ behavior: 'smooth' });
