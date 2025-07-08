@@ -190,15 +190,44 @@
 }
 .hero-section4-text h1{
   padding-bottom: 20px;
+  margin-right: 180px;
   font-size: 50px;
   text-transform: uppercase;
   font-weight: 500;
+  color: #012305;
+  display: inline-block;
+}
+.hero-section4-text a{
+  text-decoration: none;
+  color: #cb9662;
+}
+.hero-section4-text a:hover{
   color: #012305;
 }
 .hero-section4-content{
   width: 1000px;
   height: 350px;
-  border: 1px  solid black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.room{
+  width: 320px;
+  height: 350px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+.room img{
+  width: 320px;
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.room h3{
+  width: 320px;
+  height: 70px;
+  text-align: center;
+  padding-top: 20px;
 }
 .hero-section5{
   width: 100%;

@@ -111,9 +111,12 @@ body{
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
   transition: box-shadow 0.4s ease;
+}
+.residence-container div{
+  width: 500px;
 }
 
 .room-card {
@@ -145,7 +148,8 @@ body{
   background-color: #E9E9E9;
   overflow: hidden;
   cursor: pointer;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
+  padding-top: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
