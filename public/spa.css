@@ -247,7 +247,7 @@ body{
   text-align: center;
   padding-top: 160px;
   padding-bottom: 40px;
-  max-width: 1050px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .first-title {
@@ -295,6 +295,11 @@ body{
   flex-direction: column;
 
 }
+.section-blog p{
+  padding-bottom: 20px;
+  line-height: 1.5rem;
+  color:black;
+}
 .section2-blog{
   width: 100%;
   height: 550px;
@@ -328,45 +333,44 @@ body{
   color: #4E3629;
   letter-spacing: 0.5px;
 }
-p{
+.section2-blog p{
   padding-bottom: 20px;
   line-height: 1.5rem;
+  color:black;
 }
+
 .page-title {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 20px;
-  text-align: center;
-  border-bottom: 1px solid #4e3629;
-  padding-bottom: 1rem;
+  max-width: 1000px;
+  margin: 32px auto;
+  /* text-align: center; */
+  border-bottom: 3px solid #4e3629;
+  padding-bottom: 16px;
 }
 
 .page-title h1{
   color: #4e3629;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 .intro-text {
-  max-width: 800px;
-  margin: 0 auto 2rem;
-  padding: 0 20px;
+  max-width: 1000px;
+  margin: 0 auto 16px;
 }
 
 .purpose-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 20px;
-  border-radius: 8px;
-  padding: 2rem;
+  max-width: 1000px;
+  margin: 16px auto;
+  padding: 40px;
 }
 
 .purpose-item {
-  margin-bottom: 1.5rem;
+  margin-bottom:28px;
+  color:black;
 }
 
 .purpose-item h2 {
-  font-size: 1.5rem;
+  font-size: 24px;
   color: #4e3629;
-  margin-bottom: 0.5rem;
+  margin-bottom: 8px;
 }
 
 

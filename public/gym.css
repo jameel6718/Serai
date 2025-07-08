@@ -247,13 +247,13 @@ body{
   text-align: center;
   padding-top: 160px;
   padding-bottom: 40px;
-  max-width: 1050px;
+  max-width: 1000px;
   margin: 0 auto;
 }
 .first-title {
   font-size: 50px;
   font-weight: 700;
-  color: #012305;
+  color: #4e3629;
   letter-spacing: 1px;
   margin-bottom: 20px;
 }
@@ -262,15 +262,13 @@ body{
   color: black;
   letter-spacing: 0.5px;
 }
-
-        /* Blog Sections */
-        .blog-section {
+/* Blog Sections */
+   .blog-section {
           margin-bottom:60px;
           max-width: 1200px;
           margin:auto;
           margin-top:30px;
-          margin-bottom: 60px;
-          padding: 0 5%;
+          padding: 0 8%;
       }
 
       .section-header {
@@ -281,7 +279,7 @@ body{
 
       .section-header h2 {
           font-size: 42px;
-          color: #012305;
+          color: #4e3629;
           margin-right: 16px;
           white-space: nowrap;
           line-height: 1.7;
@@ -299,9 +297,8 @@ body{
           position: relative;
           overflow: hidden;
           border-radius: 8px;
-          box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-          aspect-ratio: 16/9;
-          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          /* aspect-ratio: 16/9; */
+          height:250px;
       }
 
       .gallery-item img {
@@ -327,7 +324,7 @@ body{
           color:black;
       }
       .blog-content h2{
-          color: #012305;
+          color: #4e3629;
           white-space: nowrap;
           line-height: 2;
       }
