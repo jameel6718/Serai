@@ -1,111 +1,108 @@
 const form = document.getElementById('feedbackForm');
-        const reviewsContainer = document.getElementById('reviewsContainer');
-        const successMessage = document.getElementById('successMessage');
-        let reviews = [];
+const reviewsContainer = document.getElementById('reviewsContainer');
+const successMessage = document.getElementById('successMessage');
+let reviews = [];
 
-        form.addEventListener('submit', function (e) {
-            e.preventDefault();
+form.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-            // Get field values
-            const name = document.getElementById('name').value.trim();
-            const email = document.getElementById('email').value.trim();
-            const rating = document.getElementById('rating').value;
-            const comments = document.getElementById('comments').value.trim();
+    // Get field values
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const rating = document.getElementById('rating').value;
+    const comments = document.getElementById('comments').value.trim();
 
-            // Get error message elements
-            const nameError = document.getElementById('nameError');
-            const emailError = document.getElementById('emailError');
-            const ratingError = document.getElementById('ratingError');
-            const commentsError = document.getElementById('commentsError');
+    // Get error message elements
+    const nameError = document.getElementById('nameError');
+    const emailError = document.getElementById('emailError');
+    const ratingError = document.getElementById('ratingError');
+    const commentsError = document.getElementById('commentsError');
 
-            // Clear previous errors
-            nameError.textContent = '';
-            emailError.textContent = '';
-            ratingError.textContent = '';
-            commentsError.textContent = '';
-            successMessage.textContent = '';
+    // Clear previous errors
+    nameError.textContent = '';
+    emailError.textContent = '';
+    ratingError.textContent = '';
+    commentsError.textContent = '';
+    successMessage.textContent = ''; 
 
+    let valid = true;
 
-            
+    // Name Validation (Only alphabets allowed)
+    const namePattern = /^[A-Za-z\s]+$/;
+    if (name === '') {
+        nameError.textContent = 'Please enter your name.';
+        valid = false;
+    } else if (!namePattern.test(name)) {
+        nameError.textContent = 'Name can only contain alphabets.';
+        valid = false;
+    }
 
-            let valid = true;
+    // Email Validation
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (email === '') {
+        emailError.textContent = 'Please enter your email.';
+        valid = false;
+    } else if (!emailPattern.test(email)) {
+        emailError.textContent = 'Please enter a valid email address.';
+        valid = false;
+    }
 
-            // Name Validation (Only alphabets allowed)
-            const namePattern = /^[A-Za-z\s]+$/;
-            if (name === '') {
-                nameError.textContent = 'Please enter your name.';
-                valid = false;
-            } else if (!namePattern.test(name)) {
-                nameError.textContent = 'Name can only contain alphabets.';
-                valid = false;
-            }
+    // Rating Validation
+    if (rating === '') {
+        ratingError.textContent = 'Please select a rating.';
+        valid = false;
+    }
 
-            // Email Validation
-            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (email === '') {
-                emailError.textContent = 'Please enter your email.';
-                valid = false;
-            } else if (!emailPattern.test(email)) {
-                emailError.textContent = 'Please enter a valid email address.';
-                valid = false;
-            }
+    // Comments Validation
+    if (comments === '') {
+        commentsError.textContent = 'Please write your feedback.';
+        valid = false;
+    }
 
-            // Rating Validation
-            if (rating === '') {
-                ratingError.textContent = 'Please select a rating.';
-                valid = false;
-            }
+    if (!valid) {
+        return;
+    }
 
-            // Comments Validation
-            if (comments === '') {
-                commentsError.textContent = 'Please write your feedback.';
-                valid = false;
-            }
+    // Add new review to the list
+    const newReview = {
+        name: name,
+        rating: rating,
+        comments: comments
+    };
 
-            if (!valid) {
-                return;
-            }
+    reviews.unshift(newReview);
+    if (reviews.length > 3) {
+        reviews = reviews.slice(0, 3);
+    }
 
-            // Add new review to the list
-            const newReview = {
-                name: name,
-                rating: rating,
-                comments: comments
-            };
+     displayReviews();
 
-            reviews.unshift(newReview);
-            if (reviews.length > 3) {
-                reviews = reviews.slice(0, 3);
-            }
+    // document.getElementById('reviewsContainer').scrollIntoView({ behavior: 'smooth' });
 
-            displayReviews();
+    // Reset form
+    form.reset();
 
-            // document.getElementById('reviewsContainer').scrollIntoView({ behavior: 'smooth' });
+    // Show success message
+    successMessage.textContent = 'Thank you for your feedback!';
+    successMessage.style.display = 'block';
+    setTimeout(() => {
+        successMessage.style.display = 'none';
+    }, 2000);
+});
 
-            // Reset form
-            form.reset();
+function displayReviews() {
+    reviewsContainer.innerHTML = '';
+    reviews.forEach(review => {
+        reviewsContainer.innerHTML += `
+            <div class="review">
+                <strong>${review.name}</strong> (Rating: ${review.rating}/5)
+                <p>${review.comments}</p>
+            </div>
+        `;
+    });
+}
 
-            // Show success message
-            successMessage.textContent = 'Thank you for your feedback!';
-            successMessage.style.display = 'block';
-            setTimeout(() => {
-            successMessage.style.display = 'none';
-            }, 2000);
-        });
-
-        function displayReviews() {
-            reviewsContainer.innerHTML = '';
-            reviews.forEach(review => {
-                reviewsContainer.innerHTML += `
-                    <div class="review">
-                        <strong>${review.name}</strong> (Rating: ${review.rating}/5)
-                        <p>${review.comments}</p>
-                    </div>
-                `;
-            });
-        }
-
-        // Clear error message when user focuses on a field
+// Clear error message when user focuses on a field
 document.getElementById('name').addEventListener('focus', function () {
     document.getElementById('nameError').textContent = '';
 });
