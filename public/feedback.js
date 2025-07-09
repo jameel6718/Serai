@@ -25,6 +25,9 @@ const form = document.getElementById('feedbackForm');
             commentsError.textContent = '';
             successMessage.textContent = '';
 
+
+            
+
             let valid = true;
 
             // Name Validation (Only alphabets allowed)
@@ -77,6 +80,8 @@ const form = document.getElementById('feedbackForm');
 
             displayReviews();
 
+            // document.getElementById('reviewsContainer').scrollIntoView({ behavior: 'smooth' });
+
             // Reset form
             form.reset();
 
@@ -99,3 +104,20 @@ const form = document.getElementById('feedbackForm');
                 `;
             });
         }
+
+        // Clear error message when user focuses on a field
+document.getElementById('name').addEventListener('focus', function () {
+    document.getElementById('nameError').textContent = '';
+});
+
+document.getElementById('email').addEventListener('focus', function () {
+    document.getElementById('emailError').textContent = '';
+});
+
+document.getElementById('rating').addEventListener('focus', function () {
+    document.getElementById('ratingError').textContent = '';
+});
+
+document.getElementById('comments').addEventListener('focus', function () {
+    document.getElementById('commentsError').textContent = '';
+});
