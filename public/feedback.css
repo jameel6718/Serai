@@ -117,7 +117,7 @@ input:focus, select:focus, textarea:focus {
   outline: none;
   border: 1px solid #012305;
 }
-input:-webkit-autofill {
+input:-webkit-autofill, textarea:-webkit-autofill{
   box-shadow: 0 0 0 1000px #f5d4b4 inset !important; /* Or match your input background */
   -webkit-text-fill-color: #000 !important; /* Optional: text color */
   transition: background-color 5000s ease-in-out 0s;
