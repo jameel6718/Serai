@@ -1,18 +1,16 @@
 const form = document.getElementById('feedbackForm');
 const reviewsContainer = document.getElementById('reviewsContainer');
 const successMessage = document.getElementById('successMessage');
-let reviews = [];
 
+// Submit handler
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Get field values
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const rating = document.getElementById('rating').value;
     const comments = document.getElementById('comments').value.trim();
 
-    // Get error message elements
     const nameError = document.getElementById('nameError');
     const emailError = document.getElementById('emailError');
     const ratingError = document.getElementById('ratingError');
@@ -23,13 +21,15 @@ form.addEventListener('submit', function (e) {
     emailError.textContent = '';
     ratingError.textContent = '';
     commentsError.textContent = '';
-    successMessage.textContent = ''; 
+    successMessage.textContent = '';
 
     let valid = true;
 
-    // Name Validation (Only alphabets allowed)
+    // Validation
     const namePattern = /^[A-Za-z\s]+$/;
-    if (name === '') {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    if (!name) {
         nameError.textContent = 'Please enter your name.';
         valid = false;
     } else if (!namePattern.test(name)) {
@@ -37,9 +37,7 @@ form.addEventListener('submit', function (e) {
         valid = false;
     }
 
-    // Email Validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === '') {
+    if (!email) {
         emailError.textContent = 'Please enter your email.';
         valid = false;
     } else if (!emailPattern.test(email)) {
@@ -47,74 +45,70 @@ form.addEventListener('submit', function (e) {
         valid = false;
     }
 
-    // Rating Validation
-    if (rating === '') {
+    if (!rating) {
         ratingError.textContent = 'Please select a rating.';
         valid = false;
     }
 
-    // Comments Validation
-    if (comments === '') {
+    if (!comments) {
         commentsError.textContent = 'Please write your feedback.';
         valid = false;
     }
 
-    if (!valid) {
-        return;
-    }
+    if (!valid) return;
 
-    // Add new review to the list
-    const newReview = {
-        name: name,
-        rating: rating,
-        comments: comments
-    };
+    // Submit data to server
+    fetch('/addFeedback', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, rating, comments })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+            return;
+        }
 
-    reviews.unshift(newReview);
-    if (reviews.length > 3) {
-        reviews = reviews.slice(0, 3);
-    }
-
-     displayReviews();
-
-    // document.getElementById('reviewsContainer').scrollIntoView({ behavior: 'smooth' });
-
-    // Reset form
-    form.reset();
-
-    // Show success message
-    successMessage.textContent = 'Thank you for your feedback!';
-    successMessage.style.display = 'block';
-    setTimeout(() => {
-        successMessage.style.display = 'none';
-    }, 2000);
+        form.reset();
+        successMessage.textContent = 'Thank you for your feedback!';
+        successMessage.style.display = 'block';
+        fetchReviews(); // refresh review list
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 2000);
+    })
+    .catch(err => {
+        console.error("Error submitting feedback:", err);
+    });
 });
 
-function displayReviews() {
-    reviewsContainer.innerHTML = '';
-    reviews.forEach(review => {
-        reviewsContainer.innerHTML += `
-            <div class="review">
-                <strong>${review.name}</strong> (Rating: ${review.rating}/5)
-                <p>${review.comments}</p>
-            </div>
-        `;
-    });
+// Load latest reviews from server
+function fetchReviews() {
+    fetch('/getFeedback')
+        .then(res => res.json())
+        .then(data => {
+            reviewsContainer.innerHTML = '';
+            data.forEach(review => {
+                reviewsContainer.innerHTML += `
+                    <div class="review">
+                        <strong>${review.name}</strong> (Rating: ${review.rating}/5)
+                        <p>${review.comments}</p>
+                    </div>
+                `;
+            });
+        })
+        .catch(err => {
+            console.error("Error loading reviews:", err);
+        });
 }
 
-// Clear error message when user focuses on a field
-document.getElementById('name').addEventListener('focus', function () {
-    document.getElementById('nameError').textContent = '';
+// Clear error messages on focus
+['name', 'email', 'rating', 'comments'].forEach(id => {
+    document.getElementById(id).addEventListener('focus', () => {
+        document.getElementById(id + 'Error').textContent = '';
+    });
 });
 
-document.getElementById('email').addEventListener('focus', function () {
-    document.getElementById('emailError').textContent = '';
-});
-
-document.getElementById('rating').addEventListener('focus', function () {
-    document.getElementById('ratingError').textContent = '';
-});
-
-document.getElementById('comments').addEventListener('focus', function () {
-    document.getElementById('commentsError').textContent = '';
-});
+// Load initial reviews
+window.addEventListener('DOMContentLoaded', fetchReviews);
