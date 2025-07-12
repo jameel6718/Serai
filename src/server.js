@@ -44,6 +44,23 @@ app.post("/addFeedback", async (req, res) => {
     res.status(500).send({ error: error.message });
   }
 });
+app.post("/contact", async (req, res) => {
+  try {
+    const dataObj = req.body;
+
+    if (!dataObj) {
+      return res.status(400).send({ error: "Data object is required." });
+    }
+
+    const result = await insertData("contactus", dataObj);
+    res.status(200).send({
+      message: "Data inserted successfully",
+      insertedId: result.insertedId,
+    });
+  } catch (error) {
+    res.status(500).send({ error: error.message });
+  }
+});
 
 app.listen(port, () => {
   console.log(`Server is running at http://localhost:${port}`);
