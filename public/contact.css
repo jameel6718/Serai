@@ -351,6 +351,11 @@ input:focus, textarea:focus {
   border: 1px solid #012305;
   background: rgba(255, 255, 255, 0.25) !important;
 }
+input:-webkit-autofill, textarea:-webkit-autofill{
+  box-shadow: 0 0 0 1000px #cbeee5 inset !important; /* Or match your input background */
+  -webkit-text-fill-color: #000 !important; /* Optional: text color */
+  transition: background-color 5000s ease-in-out 0s;
+}
 button {
   padding: 12px 50px;
   background-color: #012305;

@@ -105,3 +105,17 @@ window.addEventListener('load', () => {
         document.querySelector(window.location.hash).scrollIntoView({ behavior: 'smooth' });
     }
 });
+
+// Clear error message when user focuses on a field
+document.getElementById('name').addEventListener('focus', function () {
+    document.getElementById('nameError').textContent = '';
+});
+
+document.getElementById('email').addEventListener('focus', function () {
+    document.getElementById('emailError').textContent = '';
+});
+
+document.getElementById('phone').addEventListener('focus', function () {
+    document.getElementById('phoneError').textContent = '';
+});
+
