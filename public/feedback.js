@@ -101,6 +101,8 @@ form.addEventListener('submit', function (e) {
 
         displayReviews();
 
+        document.getElementById('reviewsContainer').scrollIntoView({ behavior: 'smooth' });
+
         // Reset form
         form.reset();
 
