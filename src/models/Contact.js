@@ -11,6 +11,11 @@ const contactSchema = new mongoose.Schema({
     required: true,
     match: /.+\@.+\..+/
   },
+  phone: {
+    type: String,
+    required: true,
+    minlength: 10
+  },
   message: {
     type: String,
     required: true,
@@ -23,3 +28,4 @@ const contactSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Contact', contactSchema);
+

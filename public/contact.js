@@ -7,15 +7,19 @@ form.addEventListener('submit', function (e) {
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
+    const message = document.getElementById('message').value.trim();
 
     const nameError = document.getElementById('nameError');
     const emailError = document.getElementById('emailError');
     const phoneError = document.getElementById('phoneError');
+    const messageError = document.getElementById('messageError');
+
 
     // Clear previous errors
     nameError.textContent = '';
     emailError.textContent = '';
     phoneError.textContent = '';
+    messageError.textContent = '';
     successMessage.style.display = 'none';
 
     let valid = true;
@@ -47,14 +51,21 @@ form.addEventListener('submit', function (e) {
         phoneError.textContent = 'Please enter a valid phone number.';
         valid = false;
     }
+    if (message === '') {
+    messageError.textContent = 'Please enter your message.';
+    valid = false;
+    }
+
 
     if (!valid) return;
 
     const contactData = {
-        name: name,
-        email: email,
-        message: phone // ✅ match with schema (if using 'message' in schema)
-    };
+    name: name,
+    email: email,
+    phone: phone,
+    message: message // ✅ Correct usage
+};
+
 
     fetch("/api/contact", {
         method: "POST",
@@ -96,7 +107,7 @@ window.addEventListener('load', () => {
 });
 
 // Clear errors on focus
-['name', 'email', 'phone'].forEach(field => {
+['name', 'email', 'phone', 'message'].forEach(field => {
     document.getElementById(field).addEventListener('focus', function () {
         document.getElementById(field + 'Error').textContent = '';
     });
