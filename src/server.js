@@ -1,67 +1,29 @@
-const express = require("express");
-const { connectDB, client } = require("./db");
-const path = require("path");
+const express = require('express');
+const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express();
 const port = 3000;
 
+// Middleware
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// ✅ Serve static files from ROOT/public (1 level  from src)
-app.use(express.static(path.join(__dirname, "../public")));
+// Serve static frontend files from public directory
+app.use(express.static(path.join(__dirname, '../public')));
 
-async function insertData(collectionName, dataObj) {
-  try {
-    const db = await connectDB();
-    const collection = db.collection(collectionName);
+// Connect to MongoDB
+mongoose.connect('mongodb://127.0.0.1:27017/serai', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+}).then(() => console.log('✅ MongoDB connected'))
+  .catch(err => console.error('❌ MongoDB connection error:', err));
 
-    const result = await collection.insertOne(dataObj);
-    console.log(`✅ Document inserted with _id: ${result.insertedId}`);
-    return result;
-  } catch (err) {
-    console.error(err);
-    throw new Error("Failed to insert data");
-  } finally {
-    await client.close();
-    console.log("❌ Connection closed.");
-  }
-}
+// Routes
+app.use('/api/contact', require('./routes/contact'));
+app.use('/api/feedback', require('./routes/feedback'));
 
-app.post("/addFeedback", async (req, res) => {
-  try {
-    const dataObj = req.body;
-
-    if (!dataObj) {
-      return res.status(400).send({ error: "Data object is required." });
-    }
-
-    const result = await insertData("feedback", dataObj);
-    res.status(200).send({
-      message: "Data inserted successfully",
-      insertedId: result.insertedId,
-    });
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-});
-app.post("/contact", async (req, res) => {
-  try {
-    const dataObj = req.body;
-
-    if (!dataObj) {
-      return res.status(400).send({ error: "Data object is required." });
-    }
-
-    const result = await insertData("contactus", dataObj);
-    res.status(200).send({
-      message: "Data inserted successfully",
-      insertedId: result.insertedId,
-    });
-  } catch (error) {
-    res.status(500).send({ error: error.message });
-  }
-});
-
+// Start the server
 app.listen(port, () => {
-  console.log(`Server is running at http://localhost:${port}`);
+  console.log(`🚀 Server running at http://localhost:${port}`);
 });

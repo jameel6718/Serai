@@ -3,16 +3,15 @@ const reviewsContainer = document.getElementById('reviewsContainer');
 const successMessage = document.getElementById('successMessage');
 let reviews = [];
 
+// 🟢 Submit form handler
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Get field values
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const rating = document.getElementById('rating').value;
     const comments = document.getElementById('comments').value.trim();
 
-    // Get error message elements
     const nameError = document.getElementById('nameError');
     const emailError = document.getElementById('emailError');
     const ratingError = document.getElementById('ratingError');
@@ -23,12 +22,14 @@ form.addEventListener('submit', function (e) {
     emailError.textContent = '';
     ratingError.textContent = '';
     commentsError.textContent = '';
-    successMessage.textContent = ''; 
+    successMessage.textContent = '';
 
     let valid = true;
 
-    // Name Validation (Only alphabets allowed)
+    // Validation rules
     const namePattern = /^[A-Za-z\s]+$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
     if (name === '') {
         nameError.textContent = 'Please enter your name.';
         valid = false;
@@ -37,8 +38,6 @@ form.addEventListener('submit', function (e) {
         valid = false;
     }
 
-    // Email Validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email === '') {
         emailError.textContent = 'Please enter your email.';
         valid = false;
@@ -47,82 +46,61 @@ form.addEventListener('submit', function (e) {
         valid = false;
     }
 
-    // Rating Validation
     if (rating === '') {
         ratingError.textContent = 'Please select a rating.';
         valid = false;
     }
 
-    // Comments Validation
     if (comments === '') {
         commentsError.textContent = 'Please write your feedback.';
         valid = false;
     }
 
-    if (!valid) {
-        return;
-    }
+    if (!valid) return;
 
-    // Send data to Node API
     const feedbackData = {
         name: name,
         email: email,
         rating: rating,
-        comments: comments,
+        message: comments // match schema
     };
 
-    fetch("http://localhost:3000/addFeedback", {
+    // ✅ POST to backend
+    fetch("/api/feedback", {
         method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-        },
-            body: JSON.stringify(feedbackData),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(feedbackData),
     })
     .then((response) => {
-        if (!response.ok) {
-            throw new Error("Network response was not ok.");
-        }
-            return response.json();
-        })
+        if (!response.ok) throw new Error("Network response was not ok.");
+        return response.json();
+    })
     .then((data) => {
-        console.log("Server response:", data);
-
-        // Add new review to the list on successful API call
+        // Update review list with new review
         const newReview = {
             name: name,
             rating: rating,
             comments: comments,
         };
-
         reviews.unshift(newReview);
-        if (reviews.length > 3) {
-            reviews = reviews.slice(0, 3);
-        }
+        if (reviews.length > 3) reviews = reviews.slice(0, 3);
 
         displayReviews();
-
-        document.getElementById('reviewsContainer').scrollIntoView({ behavior: 'smooth' });
-
-        // Reset form
         form.reset();
-
-        // Show success message
         successMessage.textContent = "Thank you for your feedback!";
         successMessage.style.display = "block";
-        setTimeout(() => {
-        successMessage.style.display = "none";
-        }, 2000);
+        setTimeout(() => { successMessage.style.display = "none"; }, 2000);
+        document.getElementById('reviewsContainer').scrollIntoView({ behavior: 'smooth' });
     })
     .catch((error) => {
         console.error("Error:", error);
         successMessage.textContent = "Something went wrong. Please try again.";
         successMessage.style.display = "block";
-        setTimeout(() => {
-            successMessage.style.display = "none";
-        }, 2000);
+        setTimeout(() => { successMessage.style.display = "none"; }, 2000);
     });
 });
 
+// 🟢 Display reviews from array
 function displayReviews() {
     reviewsContainer.innerHTML = '';
     reviews.forEach(review => {
@@ -135,20 +113,27 @@ function displayReviews() {
     });
 }
 
-// Clear error message when user focuses on a field
-document.getElementById('name').addEventListener('focus', function () {
-    document.getElementById('nameError').textContent = '';
+// 🔄 Load reviews on page load
+window.addEventListener('DOMContentLoaded', () => {
+    fetch('/api/feedback')
+        .then((res) => res.json())
+        .then((data) => {
+            reviews = data.map(review => ({
+                name: review.name,
+                rating: review.rating,
+                comments: review.message // match backend schema
+            }));
+            displayReviews();
+        })
+        .catch((err) => {
+            console.error('Failed to load reviews:', err);
+        });
 });
 
-document.getElementById('email').addEventListener('focus', function () {
-    document.getElementById('emailError').textContent = '';
-});
 
-document.getElementById('rating').addEventListener('focus', function () {
-    document.getElementById('ratingError').textContent = '';
+// 🟢 Clear errors on focus
+['name', 'email', 'rating', 'comments'].forEach(field => {
+    document.getElementById(field).addEventListener('focus', function () {
+        document.getElementById(field + 'Error').textContent = '';
+    });
 });
-
-document.getElementById('comments').addEventListener('focus', function () {
-    document.getElementById('commentsError').textContent = '';
-});
-

@@ -4,12 +4,10 @@ const successMessage = document.getElementById('successMessage');
 form.addEventListener('submit', function (e) {
     e.preventDefault();
 
-    // Get field values
     const name = document.getElementById('name').value.trim();
     const email = document.getElementById('email').value.trim();
     const phone = document.getElementById('phone').value.trim();
 
-    // Get error message elements
     const nameError = document.getElementById('nameError');
     const emailError = document.getElementById('emailError');
     const phoneError = document.getElementById('phoneError');
@@ -18,12 +16,14 @@ form.addEventListener('submit', function (e) {
     nameError.textContent = '';
     emailError.textContent = '';
     phoneError.textContent = '';
-    successMessage.style.display = 'none'; // Hide success message initially
+    successMessage.style.display = 'none';
 
     let valid = true;
 
-    // Name Validation (Only alphabets allowed)
     const namePattern = /^[A-Za-z\s]+$/;
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const phonePattern = /^(\+92|0092|92|0)?[-\s]?3\d{2}[-\s]?\d{7}$/;
+
     if (name === '') {
         nameError.textContent = 'Please enter your name.';
         valid = false;
@@ -32,8 +32,6 @@ form.addEventListener('submit', function (e) {
         valid = false;
     }
 
-    // Email Validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (email === '') {
         emailError.textContent = 'Please enter your email.';
         valid = false;
@@ -42,8 +40,6 @@ form.addEventListener('submit', function (e) {
         valid = false;
     }
 
-    // Phone Validation (Only numbers allowed)
-    const phonePattern = /^(\+92|0092|92|0)?[-\s]?3\d{2}[-\s]?\d{7}$/; // Phone Validation (Also accept +92 formats with spaces or dashes)
     if (phone === '') {
         phoneError.textContent = 'Please enter your phone number.';
         valid = false;
@@ -52,42 +48,36 @@ form.addEventListener('submit', function (e) {
         valid = false;
     }
 
-    // If the form is not valid, do not proceed
-    if (!valid) {
-        return;
-    }
-     // Send data to Node API
-     const feedbackData = {
+    if (!valid) return;
+
+    const contactData = {
         name: name,
         email: email,
-        phone: phone,
+        message: phone // ✅ match with schema (if using 'message' in schema)
     };
 
-    fetch("http://localhost:3000/contact", {
+    fetch("/api/contact", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
         },
-            body: JSON.stringify(feedbackData),
+        body: JSON.stringify(contactData),
     })
     .then((response) => {
         if (!response.ok) {
             throw new Error("Network response was not ok.");
         }
-            return response.json();
-        })
+        return response.json();
+    })
     .then((data) => {
         console.log("Server response:", data);
-      
-    // Reset form
-    form.reset();
 
-    // Show success message for 2 seconds
-    successMessage.textContent = 'Thank you for contacting us!';
-    successMessage.style.display = 'block';
-    setTimeout(() => {
-        successMessage.style.display = 'none';
-    }, 2000);
+        form.reset();
+        successMessage.textContent = 'Thank you for contacting us!';
+        successMessage.style.display = 'block';
+        setTimeout(() => {
+            successMessage.style.display = 'none';
+        }, 2000);
     })
     .catch((error) => {
         console.error("Error:", error);
@@ -97,7 +87,6 @@ form.addEventListener('submit', function (e) {
             successMessage.style.display = "none";
         }, 2000);
     });
-
 });
 
 window.addEventListener('load', () => {
@@ -106,16 +95,9 @@ window.addEventListener('load', () => {
     }
 });
 
-// Clear error message when user focuses on a field
-document.getElementById('name').addEventListener('focus', function () {
-    document.getElementById('nameError').textContent = '';
+// Clear errors on focus
+['name', 'email', 'phone'].forEach(field => {
+    document.getElementById(field).addEventListener('focus', function () {
+        document.getElementById(field + 'Error').textContent = '';
+    });
 });
-
-document.getElementById('email').addEventListener('focus', function () {
-    document.getElementById('emailError').textContent = '';
-});
-
-document.getElementById('phone').addEventListener('focus', function () {
-    document.getElementById('phoneError').textContent = '';
-});
-
