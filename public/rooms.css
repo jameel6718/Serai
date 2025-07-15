@@ -294,8 +294,23 @@ input:-webkit-autofill, textarea:-webkit-autofill{
   transform: scale(1.02);
   box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
-
-
+.reservation-form select {
+  width: 100%;
+  padding: 14px;
+  padding-right: 45px; /* 👈 Space for dropdown arrow */
+  border: none;
+  border-radius: 25px;
+  background-color: #f7bc8194;
+  color: #000;
+  font-size: 15px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="%234E3629" class="bi bi-caret-down-fill" viewBox="0 0 16 16"><path d="M7.247 11.14 2.451 5.658c-.566-.676-.106-1.658.753-1.658h9.592c.86 0 1.32.982.753 1.658l-4.796 5.482a1 1 0 0 1-1.506 0z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 15px center; /* 👈 Adjust this for space */
+  background-size: 16px;
+}
 
 
 /*Footer*/
