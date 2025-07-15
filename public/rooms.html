@@ -120,19 +120,19 @@
                                 <option value="3 Bedroom Residence" data-price="600">3 Bedroom Residence</option>
                                 <option value="4 Bedroom Residence" data-price="800">4 Bedroom Residence</option>
                             </select>
-                            <small id="roomTypeError" class="error-msg"></small>
+                            <div id="roomTypeError" class="error-msg"></div>
                         </div>
 
                         <div class="form-row">
                             <div>
                                 <label for="checkin">Check-in</label>
                                 <input type="date" id="checkin" required />
-                                <small id="checkinError" class="error-msg"></small>
+                                <div id="checkinError" class="error-msg"></div>
                             </div>
                             <div>
                                 <label for="checkout">Check-out</label>
                                 <input type="date" id="checkout" required />
-                                <small id="checkoutError" class="error-msg"></small>
+                                <div id="checkoutError" class="error-msg"></div>
                             </div>
                         </div>
 
@@ -140,6 +140,7 @@
                             <div>
                                 <label for="stayDays">Stay duration (days)</label>
                                 <input type="text" id="stayDays" readonly />
+                                <div class="error-msg"></div>
                             </div>
                             <div>
                                 <label for="roomCount">No. of Rooms</label>
@@ -148,7 +149,7 @@
                                     <input type="number" id="roomCount" value="1" min="1" readonly />
                                     <button type="button" id="increaseRoom">+</button>
                                 </div>
-                                <small id="roomCountError" class="error-msg"></small>
+                                <div id="roomCountError" class="error-msg"></div>
                             </div>
 
                         </div>
@@ -157,10 +158,12 @@
                             <div>
                                 <label for="pricePerNight">Amount per night</label>
                                 <input type="text" id="pricePerNight" readonly />
+                                <div class="error-msg"></div>
                             </div>
                             <div>
                                 <label for="totalCost">Total Amount</label>
                                 <input type="text" id="totalCost" readonly />
+                                <div class="error-msg"></div>
                             </div>
                         </div>
 
@@ -168,12 +171,12 @@
                             <div>
                                 <label for="name">Your Name</label>
                                 <input type="text" id="name" required />
-                                <small id="nameError" class="error-msg"></small>
+                                <div id="nameError" class="error-msg"></div>
                             </div>
                             <div>
                                 <label for="phone">Phone Number</label>
                                 <input type="text" id="phone" required />
-                                <small id="phoneError" class="error-msg"></small>
+                                <div id="phoneError" class="error-msg"></div>
                             </div>
                         </div>
 
@@ -182,6 +185,32 @@
                         </div>
                     </form>
                 </section>
+
+                <section id="paymentSection" class="reservation-form-section" style="display: none;">
+                    <h2>Payment Details</h2>
+                    <p>Please pay 50% of the total now. Choose your method:</p>
+
+                    <div class="payment-method-options">
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod" value="card" required>
+                            <span class="label-text">Credit / Debit Card</span>
+                        </label>
+
+                        <label class="payment-option">
+                            <input type="radio" name="paymentMethod" value="jazzcash" required>
+                            <span class="label-text">JazzCash</span>
+                        </label>
+                    </div>
+
+
+                    <div id="paymentDetails" style="margin-top: 15px;"></div>
+
+  
+                    <button id="payNowBtn" style="margin-top: 20px;">Pay 50% Now</button>
+                    <small id="paymentError" class="error-msg" style="display:block;margin-top:8px;"></small>
+                </section>
+
+
 
         </div>
     </main>

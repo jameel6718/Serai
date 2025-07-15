@@ -271,6 +271,7 @@ body{
   font-size: 13px;
   margin-top: 5px;
   display: block;
+  height: 20px; /* Reserve space */
 }
 input:-webkit-autofill, textarea:-webkit-autofill{
   box-shadow: 0 0 0 1000px #f7bc8183 inset !important; /* Or match your input background */
@@ -294,6 +295,10 @@ input:-webkit-autofill, textarea:-webkit-autofill{
   transform: scale(1.02);
   box-shadow: 0 15px 30px rgba(0,0,0,0.15);
 }
+#roomTypeError{
+  display: block;
+  min-height: 20px;
+}
 .reservation-form select {
   width: 100%;
   padding: 14px;
@@ -311,6 +316,124 @@ input:-webkit-autofill, textarea:-webkit-autofill{
   background-position: right 15px center; /* 👈 Adjust this for space */
   background-size: 16px;
 }
+
+#paymentSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 100px 0;
+  background: #f3cfac;
+  color: #4E3629;
+}
+
+#paymentSection h2 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#paymentSection p {
+  font-size: 16px;
+  margin-bottom: 15px;
+}
+
+#paymentSection label {
+  font-size: 16px;
+  cursor: pointer;
+  margin-bottom: 10px;
+  display: inline-block;
+}
+
+#paymentDetails label {
+  display: block;
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+#paymentDetails input {
+  padding: 10px;
+  border-radius: 20px;
+  border: none;
+  width: 100%;
+  max-width: 300px;
+  background-color: #f7bc8194;
+  color: #000;
+  font-size: 14px;
+}
+.payment-method-options {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 15px 0;
+}
+
+.payment-option {
+  position: relative;
+  padding: 15px 25px;
+  background-color: #f7bc8194;
+  border: 2px solid transparent;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 16px;
+  color: #000;
+  display: flex;
+  align-items: center;
+}
+
+.payment-option input[type="radio"] {
+  display: none;
+}
+
+.payment-option .label-text {
+  margin-left: 5px;
+}
+
+.payment-option:hover {
+  
+  border: 1px solid #4E3629;
+  background-color: #f7bc81d8;
+}
+
+.payment-option input[type="radio"]:checked + .label-text {
+  font-weight: bold;
+  color: #4E3629;
+}
+
+.payment-option input[type="radio"]:checked ~ .label-text::before {
+  content: "✔";
+  color: #4E3629;
+  margin-right: 8px;
+}
+
+#payNowBtn {
+  background-color: #4E3629;
+  color: #e0d69f;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+#payNowBtn:hover {
+  transform: scale(1.03);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+.payment-input-error {
+  color: red;
+  font-size: 13px;
+  margin-top: 4px;
+  display: block;
+}
+
+.error-border {
+  border: 2px solid red !important;
+}
+
+
 
 
 /*Footer*/

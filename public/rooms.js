@@ -152,8 +152,17 @@ document.getElementById('reservationForm').addEventListener('submit', function (
   if (!isValid) return;
 
   // All valid
-  console.log('Form submitted!');
-  alert('Reservation submitted successfully!');
+//   console.log('Form submitted!');
+//   alert('Reservation submitted successfully!');
+
+  // Show payment section
+const paymentSection = document.getElementById('paymentSection');
+paymentSection.style.display = 'flex';
+
+// Scroll to payment section
+const offsetTop = paymentSection.offsetTop - 100;
+window.scrollTo({ top: offsetTop, behavior: 'smooth' });
+
 
   // TODO: Send to backend
 });
@@ -177,6 +186,11 @@ decreaseRoom.addEventListener('click', () => {
   }
 });
 
+// Clear roomType error on change
+document.getElementById('roomType').addEventListener('change', function () {
+  document.getElementById('roomTypeError').textContent = '';
+});
+
 // Clear errors on focus
 ['name', 'phone', 'checkin', 'checkout'].forEach(field => {
   document.getElementById(field).addEventListener('focus', function () {
@@ -184,3 +198,152 @@ decreaseRoom.addEventListener('click', () => {
   });
 });
 
+document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+  radio.addEventListener('change', function () {
+    const method = this.value;
+    const container = document.getElementById('paymentDetails');
+    document.getElementById('paymentError').textContent = '';
+
+    if (method === 'card') {
+      container.innerHTML = `
+        <div>
+          <label>Card Number:
+            <input type="text" id="cardNumber" placeholder="XXXX XXXX XXXX XXXX" maxlength="19"/>
+            <small id="cardNumberError" class="payment-input-error"></small>
+          </label>
+        </div>
+        <div>
+          <label>Expiry:
+            <input type="month" id="expiry" />
+            <small id="expiryError" class="payment-input-error"></small>
+          </label>
+        </div>
+        <div>
+          <label>CVV:
+            <input type="text" id="cvv" maxlength="3" />
+            <small id="cvvError" class="payment-input-error"></small>
+          </label>
+        </div>
+      `;
+    } else if (method === 'jazzcash') {
+      container.innerHTML = `
+        <div>
+          <label>JazzCash Number:
+            <input type="text" id="jazzcashNumber" placeholder="03XXXXXXXXX" />
+            <small id="jazzcashError" class="payment-input-error"></small>
+          </label>
+        </div>
+      `;
+    } else {
+      container.innerHTML = '';
+    }
+  });
+});
+
+document.getElementById('payNowBtn').addEventListener('click', function () {
+  const selectedMethod = document.querySelector('input[name="paymentMethod"]:checked');
+  const errorEl = document.getElementById('paymentError');
+  errorEl.textContent = '';
+
+  // Clear field-specific errors
+  document.querySelectorAll('.payment-input-error').forEach(el => el.textContent = '');
+  document.querySelectorAll('#paymentDetails input').forEach(input => {
+    input.classList.remove('error-border');
+  });
+
+  if (!selectedMethod) {
+    errorEl.textContent = 'Please select a payment method.';
+    return;
+  }
+
+  const method = selectedMethod.value;
+
+  if (method === 'card') {
+    const cardNumber = document.getElementById('cardNumber');
+    const expiry = document.getElementById('expiry');
+    const cvv = document.getElementById('cvv');
+
+    let valid = true;
+
+    // Card Number validation
+    if (!cardNumber.value.trim()) {
+      document.getElementById('cardNumberError').textContent = 'Enter card number.';
+      cardNumber.classList.add('error-border');
+      valid = false;
+    } else if (!/^\d{16}$/.test(cardNumber.value.replace(/\s+/g, ''))) {
+      document.getElementById('cardNumberError').textContent = 'Card number must be 16 digits.';
+      cardNumber.classList.add('error-border');
+      valid = false;
+    }
+
+    // Expiry validation
+    if (!expiry.value.trim()) {
+      document.getElementById('expiryError').textContent = 'Enter expiry date.';
+      expiry.classList.add('error-border');
+      valid = false;
+    }
+
+    // CVV validation
+    if (!cvv.value.trim()) {
+      document.getElementById('cvvError').textContent = 'Enter CVV.';
+      cvv.classList.add('error-border');
+      valid = false;
+    } else if (!/^\d{3}$/.test(cvv.value)) {
+      document.getElementById('cvvError').textContent = 'CVV must be 3 digits.';
+      cvv.classList.add('error-border');
+      valid = false;
+    }
+
+    if (!valid) return;
+
+    alert('Card payment of 50% successful. Please pay the remaining on arrival.');
+  }
+
+  else if (method === 'jazzcash') {
+    const jazzcashInput = document.getElementById('jazzcashNumber');
+    const value = jazzcashInput.value.trim();
+    const pattern = /^(\+92|0092|92|0)?3\d{2}[-\s]?\d{7}$/;
+
+    if (!value) {
+      document.getElementById('jazzcashError').textContent = 'Enter your JazzCash number.';
+      jazzcashInput.classList.add('error-border');
+      return;
+    } else if (!pattern.test(value)) {
+      document.getElementById('jazzcashError').textContent = 'Invalid JazzCash number format.';
+      jazzcashInput.classList.add('error-border');
+      return;
+    }
+
+    alert('JazzCash payment of 50% successful. Please pay the remaining on arrival.');
+  }
+
+  // Mark payment as done
+  this.disabled = true;
+  this.textContent = 'Payment Completed';
+});
+
+// Clear error on focus
+document.addEventListener('focusin', function (e) {
+  if (e.target.matches('#paymentDetails input')) {
+    e.target.classList.remove('error-border');
+    const errorId = e.target.id + 'Error';
+    const errEl = document.getElementById(errorId);
+    if (errEl) errEl.textContent = '';
+  }
+});
+document.addEventListener('focusin', function (e) {
+  if (e.target.matches('#paymentDetails input')) {
+    e.target.classList.remove('error-border');
+
+    // Special case: fix mapping jazzcashNumber => jazzcashError
+    let errorId = '';
+    if (e.target.id === 'jazzcashNumber') {
+      errorId = 'jazzcashError';
+    } else {
+      errorId = e.target.id + 'Error';
+    }
+
+    const errEl = document.getElementById(errorId);
+    if (errEl) errEl.textContent = '';
+  }
+});
