@@ -1,6 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
+const reservationRoutes = require('./routes/reservations');
 
 const app = express();
 const port = 3000;
@@ -22,6 +23,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/serai', {
 // Routes
 app.use('/api/contact', require('./routes/contact'));
 app.use('/api/feedback', require('./routes/feedback'));
+
+app.use(express.json());
+app.use('/api/reservations', reservationRoutes);
 
 // Start the server
 app.listen(port, () => {

@@ -314,12 +314,53 @@ document.getElementById('payNowBtn').addEventListener('click', function () {
       return;
     }
 
-    alert('JazzCash payment of 50% successful. Please pay the remaining on arrival.');
-  }
+    // alert('JazzCash payment of 50% successful. Please pay the remaining on arrival.');
+    // 🟩 Collect and send form data to backend
+    const formData = {
+      roomType: document.getElementById('roomType').value,
+      pricePerNight: selectedPrice,
+      checkin: document.getElementById('checkin').value,
+      checkout: document.getElementById('checkout').value,
+      roomCount: parseInt(document.getElementById('roomCount').value),
+      stayDays: parseInt(document.getElementById('stayDays').value),
+      totalCost: parseInt(document.getElementById('totalCost').value.replace(/\D/g, '')),
+      name: document.getElementById('name').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      paymentMethod: selectedMethod.value,
+      paidAmount: parseInt(document.getElementById('totalCost').value.replace(/\D/g, '')) / 2
+    };
 
-  // Mark payment as done
-  this.disabled = true;
-  this.textContent = 'Payment Completed';
+    if (selectedMethod.value === 'card') {
+      formData.paymentDetails = {
+        cardNumber: document.getElementById('cardNumber').value,
+        expiry: document.getElementById('expiry').value,
+        cvv: document.getElementById('cvv').value
+      };
+    } else if (selectedMethod.value === 'jazzcash') {
+      formData.paymentDetails = {
+        jazzcashNumber: document.getElementById('jazzcashNumber').value
+      };
+    }
+
+    // 🟦 Send to backend API
+    fetch('/api/reservations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+    .then(res => res.json())
+    .then(data => {
+  alert(data.message || 'Reservation sent for approval!');
+  document.getElementById('payNowBtn').disabled = true;
+  document.getElementById('payNowBtn').textContent = 'Payment Completed ✅';
+    })
+    .catch(err => {
+      console.error('Error submitting reservation:', err);
+      alert('Error occurred while submitting reservation.');
+    });
+  }
 });
 
 // Clear error on focus
