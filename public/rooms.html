@@ -105,30 +105,84 @@
                 </div>
             </div>
 
+                <section id="reservationFormSection" class="reservation-form-section">
+                    <form id="reservationForm" class="reservation-form" novalidate>
+                        <h2>Make Your Reservation</h2>
 
-            <div class="booking-table" id="bookingTable">
-                    <h2>Booking Summary</h2>
-                    <table>
-                        <tr>
-                            <th>Room Type</th>
-                            <th>Check-in</th>
-                            <th>Check-out</th>
-                            <th>Price per Night</th>
-                            <th>Total Days</th>
-                            <th>Total Payment</th>
-                        </tr>
-                        <tr>
-                            <td id="roomType"></td>
-                            <td><input type="date" id="checkin" onchange="calculateTotal()"></td>
-                            <td><input type="date" id="checkout" onchange="calculateTotal()"></td>
-                            <td id="pricePerNight"></td>
-                            <td id="totalDays"></td>
-                            <td id="totalPayment"></td>
-                        </tr>
-                    </table>
+                        <div class="form-row full-width">
+                            <label for="roomType">Room Type</label>
+                            <select id="roomType" required>
+                                <option value="">-- Select Room --</option>
+                                <option value="Deluxe Room" data-price="380">Deluxe Room</option>
+                                <option value="Junior Suite" data-price="400">Junior Suite</option>
+                                <option value="Presidential Suite" data-price="450">Presidential Suite</option>
+                                <option value="Executive Suite" data-price="500">Executive Suite</option>
+                                <option value="3 Bedroom Residence" data-price="600">3 Bedroom Residence</option>
+                                <option value="4 Bedroom Residence" data-price="800">4 Bedroom Residence</option>
+                            </select>
+                            <small id="roomTypeError" class="error-msg"></small>
+                        </div>
 
-                    <a href="contact.html#formSection" id="proceedBtn" class="proceed-btn disabled">Proceed to Contact</a>
-                </div>
+                        <div class="form-row">
+                            <div>
+                                <label for="checkin">Check-in</label>
+                                <input type="date" id="checkin" required />
+                                <small id="checkinError" class="error-msg"></small>
+                            </div>
+                            <div>
+                                <label for="checkout">Check-out</label>
+                                <input type="date" id="checkout" required />
+                                <small id="checkoutError" class="error-msg"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div>
+                                <label for="stayDays">Stay duration (days)</label>
+                                <input type="text" id="stayDays" readonly />
+                            </div>
+                            <div>
+                                <label for="roomCount">No. of Rooms</label>
+                                <div class="room-counter-wrapper">
+                                    <button type="button" id="decreaseRoom">−</button>
+                                    <input type="number" id="roomCount" value="1" min="1" readonly />
+                                    <button type="button" id="increaseRoom">+</button>
+                                </div>
+                                <small id="roomCountError" class="error-msg"></small>
+                            </div>
+
+                        </div>
+
+                        <div class="form-row">
+                            <div>
+                                <label for="pricePerNight">Amount per night</label>
+                                <input type="text" id="pricePerNight" readonly />
+                            </div>
+                            <div>
+                                <label for="totalCost">Total Amount</label>
+                                <input type="text" id="totalCost" readonly />
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div>
+                                <label for="name">Your Name</label>
+                                <input type="text" id="name" required />
+                                <small id="nameError" class="error-msg"></small>
+                            </div>
+                            <div>
+                                <label for="phone">Phone Number</label>
+                                <input type="text" id="phone" required />
+                                <small id="phoneError" class="error-msg"></small>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <button type="submit">Proceed to Payment</button>
+                        </div>
+                    </form>
+                </section>
+
         </div>
     </main>
 
