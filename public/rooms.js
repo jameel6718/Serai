@@ -352,14 +352,31 @@ document.getElementById('payNowBtn').addEventListener('click', function () {
     })
     .then(res => res.json())
     .then(data => {
-  alert(data.message || 'Reservation sent for approval!');
-  document.getElementById('payNowBtn').disabled = true;
-  document.getElementById('payNowBtn').textContent = 'Payment Completed ✅';
+      alert(data.message || 'Reservation sent for approval!');
+
+      // ✅ Reset reservation form
+      document.getElementById('reservationForm').reset();
+
+      // ✅ Reset calculated fields and dropdown
+      document.getElementById('roomType').selectedIndex = 0;
+      document.getElementById('pricePerNight').value = '';
+      document.getElementById('stayDays').value = '';
+      document.getElementById('totalCost').value = '';
+      selectedPrice = 0;
+
+      // ✅ Clear and hide payment section
+      document.getElementById('paymentDetails').innerHTML = '';
+      document.getElementById('paymentSection').style.display = 'none';
+      document.getElementById('payNowBtn').disabled = false;
+      document.getElementById('payNowBtn').textContent = 'Pay 50% Now';
     })
+
     .catch(err => {
       console.error('Error submitting reservation:', err);
       alert('Error occurred while submitting reservation.');
     });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
   }
 });
 
