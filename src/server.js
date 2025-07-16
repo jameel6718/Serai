@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
-const reservationRoutes = require('./routes/reservations');
+const bookingRoutes = require('./routes/booking');
 
 const app = express();
 const port = 3000;
@@ -25,7 +25,8 @@ app.use('/api/contact', require('./routes/contact'));
 app.use('/api/feedback', require('./routes/feedback'));
 
 app.use(express.json());
-app.use('/api/reservations', reservationRoutes);
+app.use('/api/bookings', bookingRoutes);
+
 
 // Start the server
 app.listen(port, () => {
