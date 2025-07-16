@@ -343,7 +343,7 @@ document.getElementById('payNowBtn').addEventListener('click', function () {
     }
 
     // 🟦 Send to backend API
-    fetch('/api/reservations', {
+    fetch('/api/bookings', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
