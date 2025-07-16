@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .room-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .sidebar {
+            transition: all 0.3s;
+        }
+        .dashboard-card {
+            transition: all 0.3s;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-3px);
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .alert {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        .form-input:focus {
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <div class="flex h-screen" id="app">
+        <!-- Sidebar -->
+        <div class="sidebar bg-[#012305] text-white w-64 space-y-6 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out z-10" id="sidebar">
+            <div class="flex items-center space-x-2 px-4">
+                <img src="https://placehold.co/40x40" alt="Serai Hotel logo" class="h-8 w-8 rounded-full">
+                <span class="text-xl font-bold">SERAI</span>
+            </div>
+            <nav>
+                <div class="space-y-2">
+                    <button onclick="showSection('dashboard')" class="w-full flex items-center space-x-2 px-4 py-3 text-[#012305] bg-[#9DD49F] rounded">
+                        <i class="fas fa-chart-line"></i>
+                        <span>Dashboard</span>
+                    </button>
+                    <button onclick="showSection('bookings')" class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Bookings</span>
+                    </button>
+                    <button onclick="showSection('contact')" class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded">
+                        <i class="fas fa-envelope"></i>
+                        <span>Contact Us</span>
+                    </button>
+                    <button onclick="showSection('feedback')" class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded">
+                        <i class="fas fa-comment-alt"></i>
+                        <span>Feedback</span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+
+
+        <!-- Main Content -->
+        <div class="flex-1 flex flex-col overflow-hidden md:ml-64">
+            <!-- Top Navigation -->
+            <header class="bg-[#012305] shadow-sm">
+                <div class="flex items-center justify-between px-4 py-3">
+                    <div class="flex items-center">
+                        <button onclick="toggleSidebar()" class="text-gray-500 focus:outline-none md:hidden">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                        <h1 class="ml-4 text-xl font-semibold text-white" id="page-title">Dashboard</h1>
+                    </div>
+                    <div class="flex items-center space-x-4">
+                        <!-- <button class="text-gray-500 focus:outline-none">
+                            <i class="fas fa-bell"></i>
+                            <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
+                        </button> -->
+                        <div class="relative">
+                            <button class="flex items-center focus:outline-none" id="user-menu-button">
+                                <img src="https://placehold.co/40x40" alt="Administrator profile picture" class="h-8 w-8 rounded-full">
+                                <span class="ml-2 text-sm font-medium text-white">Admin</span>
+                                <i class="fas fa-chevron-down ml-1 text-white text-xs"></i>
+                            </button>
+                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden" id="user-menu">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+
+            <main class="flex-1 overflow-y-auto p-4 bg-gray-100">
+
+            </main>
+            
+        </div>
+
+    </div>
+    
+</body>
+</html>

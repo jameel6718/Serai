@@ -14,7 +14,8 @@ const contactSchema = new mongoose.Schema({
   phone: {
     type: String,
     required: true,
-    minlength: 10
+    // minlength: 10
+    match: /^(\+92|0092|92|0)?[-\s]?3\d{2}[-\s]?\d{7}$/
   },
   message: {
     type: String,
