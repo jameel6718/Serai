@@ -1,490 +1,826 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        .room-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+      .room-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+      }
+      .sidebar {
+        transition: all 0.3s;
+      }
+      .dashboard-card {
+        transition: all 0.3s;
+      }
+      .dashboard-card:hover {
+        transform: translateY(-3px);
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
         }
-        .sidebar {
-            transition: all 0.3s;
+        to {
+          opacity: 1;
+          transform: translateY(0);
         }
-        .dashboard-card {
-            transition: all 0.3s;
-        }
-        .dashboard-card:hover {
-            transform: translateY(-3px);
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .alert {
-            animation: fadeIn 0.3s ease-in-out;
-        }
-        .form-input:focus {
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
-        }
+      }
+      .alert {
+        animation: fadeIn 0.3s ease-in-out;
+      }
+      .form-input:focus {
+        box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+      }
     </style>
-</head>
-<body class="bg-gray-100 font-sans">
+  </head>
+  <body class="bg-gray-100 font-sans">
     <div class="flex h-screen" id="app">
-        <!-- Sidebar -->
-        <div class="sidebar bg-[#012305] text-white w-64 space-y-6 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out z-10" id="sidebar">
-            <div class="w-full flex justify-center py-6">
-                <img src="https://i.postimg.cc/ydbVWrHm/horizontal-logo.png" alt="Serai Hotel logo" class="w-48 h-8 rounded-full object-cover shadow-md">
-            </div>
-
-            <nav>
-                <div class="space-y-2">
-                    <button onclick="showSection('dashboard')" class="w-full flex items-center space-x-2 px-4 py-3 text-[#012305] bg-[#9DD49F] rounded">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Dashboard</span>
-                    </button>
-                    <button onclick="showSection('bookings')" class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded">
-                        <i class="fas fa-calendar-check"></i>
-                        <span>Bookings</span>
-                    </button>
-                    <button onclick="showSection('rooms')" class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded">
-                        <i class="fas fa-bed"></i>
-                        <span>Rooms</span>
-                    </button>
-                    <button onclick="showSection('contact')" class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded">
-                        <i class="fas fa-envelope"></i>
-                        <span>Contact Us</span>
-                    </button>
-                    <button onclick="showSection('feedback')" class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded">
-                        <i class="fas fa-comment-alt"></i>
-                        <span>Feedback</span>
-                    </button>
-                </div>
-            </nav>
+      <!-- Sidebar -->
+      <div
+        class="sidebar bg-[#012305] text-white w-64 space-y-6 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out z-10"
+        id="sidebar"
+      >
+        <div class="w-full flex justify-center py-6">
+          <img
+            src="https://i.postimg.cc/ydbVWrHm/horizontal-logo.png"
+            alt="Serai Hotel logo"
+            class="w-48 h-8 rounded-full object-cover shadow-md"
+          />
         </div>
 
+        <nav>
+          <div class="space-y-2">
+            <button
+              onclick="showSection('dashboard')"
+              class="w-full flex items-center space-x-2 px-4 py-3 text-[#012305] bg-[#9DD49F] rounded"
+            >
+              <i class="fas fa-chart-line"></i>
+              <span>Dashboard</span>
+            </button>
+            <button
+              onclick="showSection('bookings')"
+              class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded"
+            >
+              <i class="fas fa-calendar-check"></i>
+              <span>Bookings</span>
+            </button>
+            <button
+              onclick="showSection('rooms')"
+              class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded"
+            >
+              <i class="fas fa-bed"></i>
+              <span>Rooms</span>
+            </button>
+            <button
+              onclick="showSection('contact')"
+              class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded"
+            >
+              <i class="fas fa-envelope"></i>
+              <span>Contact Us</span>
+            </button>
+            <button
+              onclick="showSection('feedback')"
+              class="w-full flex items-center space-x-2 px-4 py-3 text-white hover:bg-[#9DD49F] hover:text-[#012305] rounded"
+            >
+              <i class="fas fa-comment-alt"></i>
+              <span>Feedback</span>
+            </button>
+          </div>
+        </nav>
+      </div>
 
-        <!-- Main Content -->
-        <div class="flex-1 flex flex-col overflow-hidden md:ml-64">
-            <!-- Top Navigation -->
-            <header class="bg-[#012305] shadow-sm">
-                <div class="flex items-center justify-between px-4 py-3">
-                    <div class="flex items-center">
-                        <button onclick="toggleSidebar()" class="text-gray-500 focus:outline-none md:hidden">
-                            <i class="fas fa-bars"></i>
-                        </button>
-                        <h1 class="ml-4 text-xl font-semibold text-white" id="page-title">Dashboard</h1>
-                    </div>
-                    <div class="flex items-center space-x-4">
-                        <!-- <button class="text-gray-500 focus:outline-none">
+      <!-- Main Content -->
+      <div class="flex-1 flex flex-col overflow-hidden md:ml-64">
+        <!-- Top Navigation -->
+        <header class="bg-[#012305] shadow-sm">
+          <div class="flex items-center justify-between px-4 py-3">
+            <div class="flex items-center">
+              <button
+                onclick="toggleSidebar()"
+                class="text-gray-500 focus:outline-none md:hidden"
+              >
+                <i class="fas fa-bars"></i>
+              </button>
+              <h1 class="ml-4 text-xl font-semibold text-white" id="page-title">
+                Dashboard
+              </h1>
+            </div>
+            <div class="flex items-center space-x-4">
+              <!-- <button class="text-gray-500 focus:outline-none">
                             <i class="fas fa-bell"></i>
                             <span class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"></span>
                         </button> -->
-                        <div class="relative">
-                            <button class="flex items-center focus:outline-none" id="user-menu-button">
-                                <i class="fas fa-user-shield" id="adminToggle" style="color: white;"></i>
-                                <span class="ml-2 text-sm font-medium text-white">Admin</span>
-                                <i class="fas fa-chevron-down ml-1 text-white text-xs"></i>
-                            </button>
-                            <div class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden" id="user-menu">
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Your Profile</a>
-                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign out</a>
-                            </div>
-                        </div>
-                    </div>
+              <div class="relative">
+                <button
+                  class="flex items-center focus:outline-none"
+                  id="user-menu-button"
+                >
+                  <i
+                    class="fas fa-user-shield"
+                    id="adminToggle"
+                    style="color: white"
+                  ></i>
+                  <span class="ml-2 text-sm font-medium text-white">Admin</span>
+                  <i class="fas fa-chevron-down ml-1 text-white text-xs"></i>
+                </button>
+                <div
+                  class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 hidden"
+                  id="user-menu"
+                >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Your Profile</a
+                  >
+                  <a
+                    href="#"
+                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >Sign out</a
+                  >
                 </div>
-            </header>
+              </div>
+            </div>
+          </div>
+        </header>
 
+        <main class="flex-1 overflow-y-auto p-4 bg-gray-100">
+          <!-- Alert -->
+          <div
+            class="alert bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 hidden"
+            id="alert"
+            role="alert"
+          >
+            <div class="flex items-center">
+              <i class="fas fa-check-circle mr-2"></i>
+              <p id="alert-message"></p>
+            </div>
+          </div>
 
-            <main class="flex-1 overflow-y-auto p-4 bg-gray-100">
-                <!-- Alert -->
-                <div class="alert bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-4 hidden" id="alert" role="alert">
-                    <div class="flex items-center">
-                        <i class="fas fa-check-circle mr-2"></i>
-                        <p id="alert-message"></p>
-                    </div>
+          <!-- Dashboard Section -->
+          <div id="dashboard-section">
+            <div class="mb-6">
+              <h2 class="text-2xl font-bold text-gray-800">
+                Welcome back, Admin
+              </h2>
+              <p class="text-gray-600">
+                Here's what's happening with your hotel today.
+              </p>
+            </div>
+
+            <!-- Stats Cards -->
+            <div
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6"
+            >
+              <div
+                class="dashboard-card bg-white p-6 rounded-lg shadow hover:shadow-md"
+              >
+                <div class="flex items-center">
+                  <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
+                    <i class="fas fa-bed"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-600">Total Rooms</p>
+                    <h3
+                      class="text-2xl font-semibold text-gray-800"
+                      id="total-rooms"
+                    >
+                      36
+                    </h3>
+                  </div>
                 </div>
-
-                <!-- Dashboard Section -->
-                <div id="dashboard-section">
-                    <div class="mb-6">
-                        <h2 class="text-2xl font-bold text-gray-800">Welcome back, Admin</h2>
-                        <p class="text-gray-600">Here's what's happening with your hotel today.</p>
-                    </div>
-
-                    <!-- Stats Cards -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-                        <div class="dashboard-card bg-white p-6 rounded-lg shadow hover:shadow-md">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-blue-100 text-blue-600 mr-4">
-                                    <i class="fas fa-bed"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">Total Rooms</p>
-                                    <h3 class="text-2xl font-semibold text-gray-800" id="total-rooms">36</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dashboard-card bg-white p-6 rounded-lg shadow hover:shadow-md">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-purple-100 text-purple-600 mr-4">
-                                    <i class="fas fa-users"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">Total Residences</p>
-                                    <h3 class="text-2xl font-semibold text-gray-800" id="total-guests">10</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dashboard-card bg-white p-6 rounded-lg shadow hover:shadow-md">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-green-100 text-green-600 mr-4">
-                                    <i class="fas fa-calendar-check"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">Today's Bookings</p>
-                                    <h3 class="text-2xl font-semibold text-gray-800" id="today-bookings">8</h3>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="dashboard-card bg-white p-6 rounded-lg shadow hover:shadow-md">
-                            <div class="flex items-center">
-                                <div class="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4">
-                                    <i class="fas fa-dollar-sign"></i>
-                                </div>
-                                <div>
-                                    <p class="text-sm font-medium text-gray-600">Today's Revenue</p>
-                                    <h3 class="text-2xl font-semibold text-gray-800" id="today-revenue">$4,320</h3>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Bookings and Occupancy Chart -->
-                    <div class=" grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
-                        <div class="bg-white p-6 rounded-lg shadow lg:col-span-2">
-                            <div class="flex justify-between items-center mb-4">
-                                <h3 class="text-lg font-semibold text-gray-800">Recent Bookings</h3>
-                                <a href="#" class="text-sm text-[#012305] hover:underline">View All</a>
-                            </div>
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
-                                        <tr>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booking ID</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Room</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dates</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200" id="recent-bookings">
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">BK-2023-001</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">Deluxe Room (301)</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">Dec 15 - Dec 18</td>
-                                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Confirmed</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">BK-2023-002</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">Jane Smith</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">Junior Suite (205)</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">Dec 16 - Dec 20</td>
-                                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">Pending</span></td>
-                                        </tr>
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">BK-2023-003</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">Robert Johnson</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">Presidential Suite (107)</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">Dec 15 - Dec 17</td>
-                                            <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Confirmed</span></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    </div>
-
-                    
+              </div>
+              <div
+                class="dashboard-card bg-white p-6 rounded-lg shadow hover:shadow-md"
+              >
+                <div class="flex items-center">
+                  <div
+                    class="p-3 rounded-full bg-purple-100 text-purple-600 mr-4"
+                  >
+                    <i class="fas fa-users"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-600">
+                      Total Residences
+                    </p>
+                    <h3
+                      class="text-2xl font-semibold text-gray-800"
+                      id="total-guests"
+                    >
+                      10
+                    </h3>
+                  </div>
                 </div>
-
-                <!-- Bookings Section -->
-                <div id="bookings-section" class="hidden">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-800">Bookings Management</h2>
-                    </div>
-
-                    <!-- Bookings Table -->
-                    <div class="bg-white rounded-lg shadow overflow-hidden">
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Booking ID</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Room</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Check-In</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Check-Out</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">BK-2023-024</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Sarah Wilson</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Deluxe Room (302)</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">2023-12-18</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">2023-12-22</td>
-                                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Confirmed</span></td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <button class="text-green-600 hover:text-[#012305] mr-3"><i class="fas fa-eye"></i></button>
-                                            <button class="text-yellow-600 hover:text-yellow-900 mr-3"><i class="fas fa-edit"></i></button>
-                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <!-- More booking rows -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+              </div>
+              <div
+                class="dashboard-card bg-white p-6 rounded-lg shadow hover:shadow-md"
+              >
+                <div class="flex items-center">
+                  <div
+                    class="p-3 rounded-full bg-green-100 text-green-600 mr-4"
+                  >
+                    <i class="fas fa-calendar-check"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-600">
+                      Today's Bookings
+                    </p>
+                    <h3
+                      class="text-2xl font-semibold text-gray-800"
+                      id="today-bookings"
+                    >
+                      8
+                    </h3>
+                  </div>
                 </div>
+              </div>
+              <div
+                class="dashboard-card bg-white p-6 rounded-lg shadow hover:shadow-md"
+              >
+                <div class="flex items-center">
+                  <div
+                    class="p-3 rounded-full bg-yellow-100 text-yellow-600 mr-4"
+                  >
+                    <i class="fas fa-dollar-sign"></i>
+                  </div>
+                  <div>
+                    <p class="text-sm font-medium text-gray-600">
+                      Today's Revenue
+                    </p>
+                    <h3
+                      class="text-2xl font-semibold text-gray-800"
+                      id="today-revenue"
+                    >
+                      $4,320
+                    </h3>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                <!-- Rooms Section -->
-                <div id="rooms-section" class="hidden">
-                    <div class="flex justify-between items-center mb-6">
-                        <h2 class="text-2xl font-bold text-gray-800">Rooms Management</h2>
-                        <button onclick="showAddRoomModal()" class="bg-[#9DD49F] hover:bg-[#012305] text-[#012305] hover:text-white px-4 py-2 rounded-md flex items-center">
-                            <i class="fas fa-plus mr-2"></i> Add Room
+            <!-- Recent Bookings and Occupancy Chart -->
+            <div class="grid-cols-1 lg:grid-cols-3 gap-6 mb-6">
+              <div class="bg-white p-6 rounded-lg shadow lg:col-span-2">
+                <div class="flex justify-between items-center mb-4">
+                  <h3 class="text-lg font-semibold text-gray-800">
+                    Recent Bookings
+                  </h3>
+                  <a href="#" class="text-sm text-[#012305] hover:underline"
+                    >View All</a
+                  >
+                </div>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Booking ID
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Guest
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Room
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Dates
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Status
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody
+                      class="bg-white divide-y divide-gray-200"
+                      id="recent-bookings"
+                    >
+                      <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">BK-2023-001</td>
+                        <td class="px-6 py-4 whitespace-nowrap">John Doe</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          Deluxe Room (301)
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          Dec 15 - Dec 18
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <span
+                            class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800"
+                            >Confirmed</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">BK-2023-002</td>
+                        <td class="px-6 py-4 whitespace-nowrap">Jane Smith</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          Junior Suite (205)
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          Dec 16 - Dec 20
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <span
+                            class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800"
+                            >Pending</span
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">BK-2023-003</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          Robert Johnson
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          Presidential Suite (107)
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          Dec 15 - Dec 17
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <span
+                            class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800"
+                            >Confirmed</span
+                          >
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bookings Section -->
+          <div id="bookings-section" class="hidden">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-2xl font-bold text-gray-800">
+                Bookings Management
+              </h2>
+            </div>
+
+            <!-- Bookings Table -->
+            <div class="bg-white rounded-lg shadow overflow-hidden">
+              <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Booking ID
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Guest
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Room
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Check-In
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Check-Out
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Status
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    id="bookings-table-body"
+                    class="bg-white divide-y divide-gray-200"
+                  >
+                    <!-- Dynamic rows will be inserted here -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <!-- Rooms Section -->
+          <div id="rooms-section" class="hidden">
+            <div class="flex justify-between items-center mb-6">
+              <h2 class="text-2xl font-bold text-gray-800">Rooms Management</h2>
+              <button
+                onclick="showAddRoomModal()"
+                class="bg-[#9DD49F] hover:bg-[#012305] text-[#012305] hover:text-white px-4 py-2 rounded-md flex items-center"
+              >
+                <i class="fas fa-plus mr-2"></i> Add Room
+              </button>
+            </div>
+
+            <!-- Room Types Table -->
+            <div class="bg-white p-6 rounded-lg shadow mb-6">
+              <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                Room Types
+              </h3>
+              <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Type
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Description
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Price
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap">Deluxe Suite</td>
+                      <td class="px-6 py-4">
+                        Spacious suite with king bed and city view
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">$299</td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <button
+                          class="text-yellow-600 hover:text-yellow-900 mr-3"
+                        >
+                          <i class="fas fa-edit"></i>
                         </button>
-                    </div>
+                        <button class="text-red-600 hover:text-red-900">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <!-- More room type rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
 
-                    <!-- Room Types Table -->
-                    <div class="bg-white p-6 rounded-lg shadow mb-6">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Room Types</h3>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">Deluxe Suite</td>
-                                        <td class="px-6 py-4">Spacious suite with king bed and city view</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">$299</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <button class="text-yellow-600 hover:text-yellow-900 mr-3"><i class="fas fa-edit"></i></button>
-                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <!-- More room type rows -->
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+            <!-- Rooms Table -->
+            <div class="bg-white p-6 rounded-lg shadow">
+              <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                All Rooms
+              </h3>
+              <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Room No.
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Type
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Status
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap">301</td>
+                      <td class="px-6 py-4 whitespace-nowrap">Deluxe Suite</td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <span
+                          class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800"
+                          >Available</span
+                        >
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <button
+                          class="text-yellow-600 hover:text-yellow-900 mr-3"
+                        >
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="text-red-600 hover:text-red-900">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <!-- More room rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-                    <!-- Rooms Table -->
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">All Rooms</h3>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Room No.</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">301</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Deluxe Suite</td>
-                                        <td class="px-6 py-4 whitespace-nowrap"><span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">Available</span></td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <button class="text-yellow-600 hover:text-yellow-900 mr-3"><i class="fas fa-edit"></i></button>
-                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <!-- More room rows -->
-                                </tbody>
-                            </table>
-                        </div>
+          <!-- Contact Us Section -->
+          <div id="contact-section" class="hidden">
+            <div class="bg-white p-6 rounded-lg shadow">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6">Contact Us</h2>
+              <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                  <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                    Contact Information
+                  </h3>
+                  <div class="space-y-4">
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0 bg-[#9DD49F] rounded-full p-3">
+                        <i class="fas fa-map-marker-alt text-[#012305]"></i>
+                      </div>
+                      <div class="ml-4">
+                        <h4 class="text-sm font-medium text-gray-500">
+                          Address
+                        </h4>
+                        <p class="text-gray-700 mt-1">
+                          2 A Main Entrance Street, Islamabad, Pakistan
+                        </p>
+                      </div>
                     </div>
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0 bg-[#9DD49F] rounded-full p-3">
+                        <i class="fas fa-phone-alt text-[#012305]"></i>
+                      </div>
+                      <div class="ml-4">
+                        <h4 class="text-sm font-medium text-gray-500">Phone</h4>
+                        <p class="text-gray-700 mt-1">+92-333-4312567</p>
+                      </div>
+                    </div>
+                    <div class="flex items-start">
+                      <div class="flex-shrink-0 bg-[#9DD49F] rounded-full p-3">
+                        <i class="fas fa-envelope text-[#012305]"></i>
+                      </div>
+                      <div class="ml-4">
+                        <h4 class="text-sm font-medium text-gray-500">Email</h4>
+                        <p class="text-gray-700 mt-1">seraihotel28@gmail.com</p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
+            <div class="mb-8">
+              <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                Recent Messages
+              </h3>
+              <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-gray-200">
+                  <thead class="bg-gray-50">
+                    <tr>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Date
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Guest
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Email
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Phone #
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Message
+                      </th>
+                      <th
+                        class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                      >
+                        Actions
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody class="bg-white divide-y divide-gray-200">
+                    <tr>
+                      <td class="px-6 py-4 whitespace-nowrap">2023-12-05</td>
+                      <td class="px-6 py-4 whitespace-nowrap">Sarah Johnson</td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        Sarah@gmail.com
+                      </td>
 
-                <!-- Contact Us Section -->
-                <div id="contact-section" class="hidden">
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Contact Us</h2>
-                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
-                            <div>
-                                <h3 class="text-lg font-semibold text-gray-800 mb-4">Contact Information</h3>
-                                <div class="space-y-4">
-                                    <div class="flex items-start">
-                                        <div class="flex-shrink-0 bg-[#9DD49F] rounded-full p-3">
-                                            <i class="fas fa-map-marker-alt text-[#012305]"></i>
-                                        </div>
-                                        <div class="ml-4">
-                                            <h4 class="text-sm font-medium text-gray-500">Address</h4>
-                                            <p class="text-gray-700 mt-1">2 A Main Entrance Street, Islamabad, Pakistan</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <div class="flex-shrink-0 bg-[#9DD49F] rounded-full p-3">
-                                            <i class="fas fa-phone-alt text-[#012305]"></i>
-                                        </div>
-                                        <div class="ml-4">
-                                            <h4 class="text-sm font-medium text-gray-500">Phone</h4>
-                                            <p class="text-gray-700 mt-1">+92-333-4312567</p>
-                                        </div>
-                                    </div>
-                                    <div class="flex items-start">
-                                        <div class="flex-shrink-0 bg-[#9DD49F] rounded-full p-3">
-                                            <i class="fas fa-envelope text-[#012305]"></i>
-                                        </div>
-                                        <div class="ml-4">
-                                            <h4 class="text-sm font-medium text-gray-500">Email</h4>
-                                            <p class="text-gray-700 mt-1">seraihotel28@gmail.com</p>
-                                        </div>
-                                    </div>
-                                </div>
+                      <td class="px-6 py-4 whitespace-nowrap">0300 1234567</td>
+                      <td class="px-6 py-4">
+                        Excellent service! The staff was very helpful and the
+                        room was spotless.
+                      </td>
+                      <td class="px-6 py-4 whitespace-nowrap">
+                        <button class="text-blue-600 hover:text-blue-900 mr-3">
+                          <i class="fas fa-eye"></i>
+                        </button>
+                        <button class="text-red-600 hover:text-red-900">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </td>
+                    </tr>
+                    <!-- More contact us rows -->
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
 
-                            </div>
-                        </div>
-                        
+          <!-- Feedback Section -->
+          <div id="feedback-section" class="hidden">
+            <div class="bg-white p-6 rounded-lg shadow">
+              <h2 class="text-2xl font-bold text-gray-800 mb-6">
+                Guest Feedback
+              </h2>
+
+              <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                  Feedback Summary
+                </h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                  <div
+                    class="bg-white p-4 rounded-lg shadow border-t-4 border-green-500"
+                  >
+                    <div class="flex items-center">
+                      <div class="bg-green-100 rounded-full p-3 mr-4">
+                        <i class="fas fa-thumbs-up text-green-600"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-medium text-gray-500">
+                          Positive Feedback
+                        </p>
+                        <h3 class="text-2xl font-semibold text-gray-800">
+                          87%
+                        </h3>
+                      </div>
                     </div>
-                    <div class="mb-8">
-                        <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Messages</h3>
-                        <div class="overflow-x-auto">
-                            <table class="min-w-full divide-y divide-gray-200">
-                                <thead class="bg-gray-50">
-                                    <tr>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Phone #</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="bg-white divide-y divide-gray-200">
-                                    <tr>
-                                        <td class="px-6 py-4 whitespace-nowrap">2023-12-05</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Sarah Johnson</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">Sarah@gmail.com</td>
-
-                                        <td class="px-6 py-4 whitespace-nowrap">0300 1234567</td>
-                                        <td class="px-6 py-4">Excellent service! The staff was very helpful and the room was spotless.</td>
-                                        <td class="px-6 py-4 whitespace-nowrap">
-                                            <button class="text-blue-600 hover:text-blue-900 mr-3"><i class="fas fa-eye"></i></button>
-                                            <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                        </td>
-                                    </tr>
-                                    <!-- More contact us rows -->
-                                </tbody>
-                            </table>
-                        </div>
+                  </div>
+                  <div
+                    class="bg-white p-4 rounded-lg shadow border-t-4 border-yellow-500"
+                  >
+                    <div class="flex items-center">
+                      <div class="bg-yellow-100 rounded-full p-3 mr-4">
+                        <i class="fas fa-comment-alt text-yellow-600"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-medium text-gray-500">
+                          Total Comments
+                        </p>
+                        <h3 class="text-2xl font-semibold text-gray-800">
+                          142
+                        </h3>
+                      </div>
                     </div>
+                  </div>
+                  <div
+                    class="bg-white p-4 rounded-lg shadow border-t-4 border-red-500"
+                  >
+                    <div class="flex items-center">
+                      <div class="bg-red-100 rounded-full p-3 mr-4">
+                        <i class="fas fa-thumbs-down text-red-600"></i>
+                      </div>
+                      <div>
+                        <p class="text-sm font-medium text-gray-500">
+                          Issues Reported
+                        </p>
+                        <h3 class="text-2xl font-semibold text-gray-800">15</h3>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-                
-                <!-- Feedback Section -->
-                <div id="feedback-section" class="hidden">
-                    <div class="bg-white p-6 rounded-lg shadow">
-                        <h2 class="text-2xl font-bold text-gray-800 mb-6">Guest Feedback</h2>
-                        
-                        <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Feedback Summary</h3>
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-                                <div class="bg-white p-4 rounded-lg shadow border-t-4 border-green-500">
-                                    <div class="flex items-center">
-                                        <div class="bg-green-100 rounded-full p-3 mr-4">
-                                            <i class="fas fa-thumbs-up text-green-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-medium text-gray-500">Positive Feedback</p>
-                                            <h3 class="text-2xl font-semibold text-gray-800">87%</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-white p-4 rounded-lg shadow border-t-4 border-yellow-500">
-                                    <div class="flex items-center">
-                                        <div class="bg-yellow-100 rounded-full p-3 mr-4">
-                                            <i class="fas fa-comment-alt text-yellow-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-medium text-gray-500">Total Comments</p>
-                                            <h3 class="text-2xl font-semibold text-gray-800">142</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="bg-white p-4 rounded-lg shadow border-t-4 border-red-500">
-                                    <div class="flex items-center">
-                                        <div class="bg-red-100 rounded-full p-3 mr-4">
-                                            <i class="fas fa-thumbs-down text-red-600"></i>
-                                        </div>
-                                        <div>
-                                            <p class="text-sm font-medium text-gray-500">Issues Reported</p>
-                                            <h3 class="text-2xl font-semibold text-gray-800">15</h3>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+              </div>
 
-                        <div class="mb-8">
-                            <h3 class="text-lg font-semibold text-gray-800 mb-4">Recent Feedback</h3>
-                            <div class="overflow-x-auto">
-                                <table class="min-w-full divide-y divide-gray-200">
-                                    <thead class="bg-gray-50">
-                                        <tr>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Guest</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Rating</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Comments</th>
-                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="bg-white divide-y divide-gray-200">
-                                        <tr>
-                                            <td class="px-6 py-4 whitespace-nowrap">2023-12-05</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">Sarah Johnson</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">Sarah@gmail.com</td>
+              <div class="mb-8">
+                <h3 class="text-lg font-semibold text-gray-800 mb-4">
+                  Recent Feedback
+                </h3>
+                <div class="overflow-x-auto">
+                  <table class="min-w-full divide-y divide-gray-200">
+                    <thead class="bg-gray-50">
+                      <tr>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Date
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Guest
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Email
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Rating
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Comments
+                        </th>
+                        <th
+                          class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                        >
+                          Actions
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-gray-200">
+                      <tr>
+                        <td class="px-6 py-4 whitespace-nowrap">2023-12-05</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          Sarah Johnson
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          Sarah@gmail.com
+                        </td>
 
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                (5/5)
-                                            </td>
-                                            <td class="px-6 py-4">Excellent service! The staff was very helpful and the room was spotless.</td>
-                                            <td class="px-6 py-4 whitespace-nowrap">
-                                                <button class="text-blue-600 hover:text-blue-900 mr-3"><i class="fas fa-eye"></i></button>
-                                                <button class="text-red-600 hover:text-red-900"><i class="fas fa-trash"></i></button>
-                                            </td>
-                                        </tr>
-                                        <!-- More feedback rows -->
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-
-                    </div>
+                        <td class="px-6 py-4 whitespace-nowrap">(5/5)</td>
+                        <td class="px-6 py-4">
+                          Excellent service! The staff was very helpful and the
+                          room was spotless.
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                          <button
+                            class="text-blue-600 hover:text-blue-900 mr-3"
+                          >
+                            <i class="fas fa-eye"></i>
+                          </button>
+                          <button class="text-red-600 hover:text-red-900">
+                            <i class="fas fa-trash"></i>
+                          </button>
+                        </td>
+                      </tr>
+                      <!-- More feedback rows -->
+                    </tbody>
+                  </table>
                 </div>
-
-            </main>
-            
-        </div>
-
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
     </div>
-    
+
     <script src="admin-dashboard.js"></script>
-</body>
+    <script src="booking.js"></script>
+    <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    if (typeof loadBookings === 'function') {
+      loadBookings();
+    } else {
+      console.error('loadBookings is not defined');
+    }
+  });
+  </script>
+  </body>
 </html>

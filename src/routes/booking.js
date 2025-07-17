@@ -5,6 +5,7 @@ const Booking = require('../models/Booking');
 // POST /api/bookings
 router.post('/', async (req, res) => {
   try {
+    
     const {
       roomType, checkin, checkout,
       name, phone,
@@ -34,6 +35,17 @@ router.post('/', async (req, res) => {
   } catch (err) {
     console.error('Error saving booking:', err);
     res.status(500).json({ message: 'Server error while saving booking' });
+  }
+});
+
+// ✅ GET: Fetch all bookings
+router.get('/', async (req, res) => {
+  try {
+    const bookings = await Booking.find({});
+    res.status(200).json(bookings); // returns empty array if no bookings
+  } catch (err) {
+    console.error('Error fetching bookings:', err);
+    res.status(500).json({ message: 'Server error while fetching bookings' });
   }
 });
 
