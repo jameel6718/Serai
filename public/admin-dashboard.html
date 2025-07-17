@@ -36,10 +36,10 @@
     <div class="flex h-screen" id="app">
         <!-- Sidebar -->
         <div class="sidebar bg-[#012305] text-white w-64 space-y-6 py-7 px-2 fixed inset-y-0 left-0 transform -translate-x-full md:translate-x-0 transition duration-200 ease-in-out z-10" id="sidebar">
-            <div class="flex items-center space-x-2 px-4">
-                <img src="https://placehold.co/40x40" alt="Serai Hotel logo" class="h-8 w-8 rounded-full">
-                <span class="text-xl font-bold">SERAI</span>
+            <div class="w-full flex justify-center py-6">
+                <img src="https://i.postimg.cc/ydbVWrHm/horizontal-logo.png" alt="Serai Hotel logo" class="w-48 h-8 rounded-full object-cover shadow-md">
             </div>
+
             <nav>
                 <div class="space-y-2">
                     <button onclick="showSection('dashboard')" class="w-full flex items-center space-x-2 px-4 py-3 text-[#012305] bg-[#9DD49F] rounded">
@@ -85,7 +85,7 @@
                         </button> -->
                         <div class="relative">
                             <button class="flex items-center focus:outline-none" id="user-menu-button">
-                                <img src="https://placehold.co/40x40" alt="Administrator profile picture" class="h-8 w-8 rounded-full">
+                                <i class="fas fa-user-shield" id="adminToggle" style="color: white;"></i>
                                 <span class="ml-2 text-sm font-medium text-white">Admin</span>
                                 <i class="fas fa-chevron-down ml-1 text-white text-xs"></i>
                             </button>

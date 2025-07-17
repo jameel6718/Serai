@@ -1,24 +1,15 @@
 {
-  "name": "serai",
-  "version": "1.0.0",
-  "description": "The Serai Hotel Reservation System is a modern, full-stack web application developed to provide a seamless experience for customers looking to explore and book accommodations at Serai Hotel. The system is developed using HTML, CSS, JavaScript, Node.js, Express.js, and MongoDB. It offers a scalable, responsive, and user-friendly platform.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/HinayDevelpor22/Serai.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/HinayDevelpor22/Serai/issues"
-  },
-  "homepage": "https://github.com/HinayDevelpor22/Serai#readme",
   "dependencies": {
     "express": "^5.1.0",
-    "mongoose": "^8.16.3"
+    "mongodb": "^6.17.0",
+    "mongoose": "^8.16.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+
   }
 }

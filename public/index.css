@@ -115,6 +115,11 @@
     display: block;
     min-height: 15px;
 }
+#accessError{
+  margin-top: 10px;
+  text-align: center;
+  font-size: 15px;
+}
 input:-webkit-autofill, textarea:-webkit-autofill{
   box-shadow: 0 0 0 1000px #bfe6c0 inset !important; /* Or match your input background */
   -webkit-text-fill-color: #000 !important; /* Optional: text color */

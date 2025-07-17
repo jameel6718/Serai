@@ -11,7 +11,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="/Serai/pictures/horizontal-logo.png" alt="website logo" width="250px" height="auto">
+                <img src="https://i.postimg.cc/ydbVWrHm/horizontal-logo.png" alt="website logo" width="250px" height="auto">
             </div>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Home</a></li>
@@ -19,8 +19,34 @@
                 <li><a href="rooms.html" class="nav-link">Rooms</a></li>
                 <li><a href="contact.html" class="nav-link">Contact Us</a></li>
             </ul>
+
+            <div class="admin-icon">
+                <i class="fas fa-user-shield" id="adminToggle"></i>
+              </div>
         </nav>
     </header>
+
+    <!-- Admin Sidebar Form -->
+    <div id="adminSidebar" class="admin-sidebar">
+        <span class="close-btn" id="closeSidebar">&times;</span>
+    
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form" novalidate>
+      <h2>Admin Login</h2>
+    
+      <label>Email:</label>
+      <input type="email" name="email" id="loginEmail" required>
+      <span class="error-msg" id="loginEmailError"></span>
+    
+      <label>Password:</label>
+      <input type="password" name="password" id="loginPassword" required>
+      <span class="error-msg" id="loginPasswordError"></span>
+    
+      <button type="submit">Login</button>
+      <span id="accessError" class="error-msg"></span>
+    </form>
+    
+    </div>
 
     <main>
         <!-- <div class="heroSection">
@@ -75,13 +101,13 @@
                 </p>
             </div>
             <div class="residence-container">
-                <div class="room-card, residence-card" onclick="selectRoom('3 Bedroom Residence', 600)">
+                <div class="residence-card" onclick="selectRoom('3 Bedroom Residence', 600)">
                     <img src="https://i.pinimg.com/736x/7e/2b/65/7e2b65121d1d84d082187df295785db1.jpg" alt="Residence">
                     <img src="https://i.pinimg.com/736x/bf/dd/d4/bfddd42ecee4907ee4d956d115137670.jpg" alt="Residence">
                     <img src="https://i.pinimg.com/736x/7b/98/5a/7b985a4f5a4bb460ba44f133221472b2.jpg" alt="Residence">
 
                 </div>
-                <div class="room-card, residence-card" onclick="selectRoom('3 Bedroom Residence', 600)">
+                <div class="residence-card" onclick="selectRoom('3 Bedroom Residence', 600)">
                     <div class="residence-details">
                         <h3>3 Bedroom Residence</h3>
                         <p>Welcome to the Three-Bedroom Residence – a luxurious space designed for families, groups, or guests seeking comfort, privacy, and style in one exceptional setting. Perfectly crafted for longer stays or shared getaways, this residence offers the best of both spacious living and premium hotel services.</p>
@@ -91,14 +117,14 @@
             </div>
 
             <div class="residence-container">
-                <div class="room-card, residence-card" onclick="selectRoom('4 Bedroom Residence', 800)">
+                <div class="residence-card" onclick="selectRoom('4 Bedroom Residence', 800)">
                     <div class="residence-details">
                         <h3>4 Bedroom Residence</h3>
                         <p>The Four-Bedroom Residence at Serai Hotel is a spacious retreat designed for larger families or groups seeking comfort, privacy, and style. With four beautifully furnished bedrooms, a welcoming living space, a private balcony with stunning views, and all modern amenities, this residence offers the perfect setting for unforgettable stays.</p>
                         <p>Price: $800 / night</p>
                     </div>
                 </div>
-                <div class="room-card, residence-card" onclick="selectRoom('4 Bedroom Residence', 800)">
+                <div class="residence-card" onclick="selectRoom('4 Bedroom Residence', 800)">
                     <img src="https://i.pinimg.com/736x/1c/19/99/1c1999d292dec99e5743b81ba4d593b4.jpg" alt="Residence">
                     <img src="https://i.pinimg.com/736x/db/05/a4/db05a4fe298577e4d7cce6e4f023d5d2.jpg" alt="Residence">
                     <img src="https://i.pinimg.com/736x/ac/b7/37/acb737ee361c1bd96a7ec0a26ddd0809.jpg" alt="Residence">
@@ -220,7 +246,7 @@
           <div class="footer-container">
               <div class="footer-logo">
                   <div class="logo-container">
-                      <img src="/Serai/pictures/vertical-logo.png" alt="Luxury hotel brand logo" class="logo-img">
+                      <img src="https://i.postimg.cc/T3DQsy1f/vertical-logo.png" alt="Luxury hotel brand logo" class="logo-img">
                   </div>
                   <p class="footer-about">
                       Luxury accommodations with premium facilities and exceptional service. 
