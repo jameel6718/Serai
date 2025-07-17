@@ -38,7 +38,7 @@ router.post('/', async (req, res) => {
   }
 });
 
-// ✅ GET: Fetch all bookings
+// ✅ GET: Fetch all booking
 router.get('/', async (req, res) => {
   try {
     const bookings = await Booking.find({});
